@@ -1,0 +1,10 @@
+<div class="list-group">
+  <li class="list-group-item mt-3" *ngFor="let patient of Mocks.patients">
+    <app-patient-row
+      [situation]="patient.situation"
+      [treatments]="patient.treatments"
+    ></app-patient-row>
+  </li>
+</div>
+
+

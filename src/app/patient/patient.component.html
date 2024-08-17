@@ -1,0 +1,110 @@
+<form class="form-container" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="inputSituation" class="mb-1 h5">Condition:</label>
+    <div class="input-group mb-3">
+      <input type="text" placeholder="Add condition here"
+             class="form-control"
+             name="inputSituation"
+             id="inputSituation"
+             [(ngModel)]="situation"
+             (ngModelChange)="onSituationInputChange($event)"
+             #situationInputRef="ngModel"
+      >
+      <button *ngIf="situationInputRef.dirty  && displayAddSituationBtn"
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="onAddSituationBtnClicked()">Add
+      </button>
+    </div>
+
+    <ul class="dropdown-menu show" *ngIf="filteredSituation.length >0">
+      <li class="dropdown-item" *ngFor="let situation of filteredSituation"
+          (click)="onSituationDropdownClick(situation)">{{ situation }}
+      </li>
+    </ul>
+
+    <label class="mb-2 h5">Treatment:</label>
+    <div class="input-group mb-2">
+      <input type="text" placeholder="Add treatment here"
+             class="form-control"
+             name="circumstance+Input"
+             [(ngModel)]="circumstance"
+             id="circumstanceInput"/>
+      <div class="btn-group">
+        <button class="btn btn-outline-secondary"
+                (click)="onCategoryBtnClicked()"
+                type="button">{{ selectedCategory }}
+        </button>
+        <ul class="dropdown-menu show" *ngIf="showCategoryDropdown"
+            data-popper-placement="bottom-start"
+            style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 40px);">
+          <li class="dropdown-item" *ngFor="let category of Mocks.qualification"
+              (click)="onCategoryChange(category)"
+          >{{ category }}
+          </li>
+        </ul>
+
+
+        <button class="btn btn-outline-secondary"
+                (click)="onAddCircumstanceBtnClicked()"
+                type="button">Add
+        </button>
+      </div>
+    </div>
+
+
+    <ol class="list-group list-group-numbered mt-2">
+      <li *ngFor="let circumstance of treatments"
+          class="list-group-item d-flex justify-content-between align-items-start mt-2">
+        <div class="ms-2 me-auto multiline-text">
+          {{circumstance.category}} - {{ circumstance.treatment }}
+        </div>
+        <button class="btn btn-danger btn-danger-circ"
+                (click)="onDeleteCircumstanceBtnClicked(circumstance)"
+                type="button">X
+        </button>
+      </li>
+    </ol>
+
+    <div class="row justify-content-center mt-3">
+      <div class="col-4">
+        <button class="btn btn-outline-success "
+                type="submit">Save
+        </button>
+      </div>
+
+      <div class="col-4">
+        <button class="btn btn-outline-danger"
+                type="button">Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<style>
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+
+  .multiline-text {
+    /*width: 100%;*/
+    max-width: 600px;
+    /*padding: 10px;*/
+    /*border: 1px solid #ccc;*/
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .btn-danger-circ {
+    display: flex;
+    align-self: center;
+
+  }
+
+</style>

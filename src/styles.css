@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+.multiline-text {
+  max-width: 600px;
+  padding: 10px;
+  white-space: pre-wrap;
+  word-break: break-word;
+
+  @media (max-width: 600px) {
+    width: 100px;
+  }
+}
