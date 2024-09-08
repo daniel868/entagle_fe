@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {NgForOf, NgIf, NgTemplateOutlet} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Mocks} from "../mocks/Mocks";
+import {RegisterComponent} from "./register/register.component";
+import {LoginComponent} from "./login/login.component";
 
 @Component({
   selector: 'app-auth',
@@ -11,59 +13,18 @@ import {Mocks} from "../mocks/Mocks";
     NgIf,
     NgTemplateOutlet,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RegisterComponent,
+    LoginComponent
   ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css'
 })
 export class AuthComponent {
 
-  currentAuthStep: number = 1;
+  registerForm: boolean = false;
 
-  qualifications: string[] = [];
-
-  competences: string[] = [];
-
-  currentCompetence: string = '';
-
-  selectedQualification: string = 'Choose...';
-
-
-  protected readonly Mocks = Mocks;
-
-  onQualificationAdd() {
-    let value = this.qualifications.find(value => {
-      return value === this.selectedQualification
-    }) || null;
-
-    if (value == null) {
-      this.qualifications.push(this.selectedQualification);
-    }
-
-  }
-
-  onQualificationChange(newValue: string) {
-    this.selectedQualification = newValue;
-  }
-
-  onCompetenceAdd() {
-    if (this.currentCompetence !== '') {
-      this.competences.push(this.currentCompetence);
-      this.currentCompetence = '';
-    }
-  }
-
-  onNextClicked() {
-    if (this.currentAuthStep == 3) {
-      return;
-    }
-    this.currentAuthStep++;
-  }
-
-  onCancelClicked() {
-    if (this.currentAuthStep == 1) {
-      return;
-    }
-    this.currentAuthStep--;
+  onRegisterClicked(newValue: boolean) {
+    this.registerForm = newValue;
   }
 }

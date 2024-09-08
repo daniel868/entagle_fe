@@ -6,3 +6,15 @@
   border-radius: 10px;
   background-color: #f9f9f9;
 }
+
+
+.form-control {
+  max-width: 400px
+}
+
+.max-width-style-class {
+  width: 350px;
+  @media (max-width: 600px) {
+    width: 200px;
+  }
+}

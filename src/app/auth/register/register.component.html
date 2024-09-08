@@ -1,0 +1,128 @@
+<div class="row">
+  <form class="form-container row">
+    <div *ngIf="currentAuthStep==1">
+      <ng-container *ngTemplateOutlet="step1"></ng-container>
+    </div>
+    <div *ngIf="currentAuthStep==2">
+      <ng-container *ngTemplateOutlet="step2"></ng-container>
+    </div>
+    <div *ngIf="currentAuthStep==3">
+      <ng-container *ngTemplateOutlet="step3"></ng-container>
+    </div>
+    <div class="row justify-content-around mt-3">
+      <div class="col-2">
+        <button class="btn btn-primary" (click)="onNextClicked()">{{ currentAuthStep !== 3 ? 'Next' : 'Submit' }}
+        </button>
+      </div>
+      <div class="col-4" *ngIf="currentAuthStep!==1">
+        <button class="btn btn-danger" (click)="onCancelClicked()">Cancel</button>
+      </div>
+      <div class="col-4" *ngIf="currentAuthStep==1">
+        <button class="btn btn-danger" (click)="onLoginBtnClicked()">Login</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #step1>
+  <label for="username" class="mb-2 mt-2 h5">Username:</label>
+  <input class="form-control"
+         style=""
+         placeholder="Username"
+         type="text"
+         required
+         id="username"
+         [(ngModel)]="username"
+  >
+
+  <label for="email" class="mb-2 mt-2 h5">Email:</label>
+  <input class="form-control"
+         placeholder="Email"
+         type="email"
+         id="email"
+         required
+         [(ngModel)]="email"
+  >
+
+  <div class="form-group">
+    <label for="password" class="mb-2 mt-2 h5">Password:</label>
+    <input class="form-control mt-2"
+           id="password"
+           type="password"
+           placeholder="Password"
+           [(ngModel)]="password"
+           required>
+  </div>
+
+  <div class="form-group">
+    <label for="confirmPassword" class="mb-2 mt-2 h5">Confirm password:</label>
+    <input class="form-control mt-2"
+           id="confirmPassword"
+           placeholder="Confirm password"
+           type="password"
+           required>
+  </div>
+</ng-template>
+
+
+<ng-template #step2>
+  <div class="form-group">
+    <label for="qualification" class="mb-2 mt-2 h5">Please choose one or more activity domain</label>
+    <div class="input-group">
+
+      <select class="form-select" id="qualification" style="max-width: 350px"
+              [(ngModel)]="selectedQualification"
+              (ngModelChange)="onQualificationChange($event)"
+      >
+        <option selected>Choose...</option>
+        <option *ngFor="let qualification of Mocks.qualification"
+                value="{{qualification}}">{{ qualification }}
+        </option>
+      </select>
+      <button class="btn btn-outline-secondary" type="button" (click)="onQualificationAdd()">Add</button>
+    </div>
+    <ol class="list-group list-group-numbered mt-2" style=" align-items: center">
+      <li *ngFor="let qualification of qualifications" class="list-group-item d-flex justify-content-center  mt-2"
+          style="width: 250px; "
+      >
+        <div class="ms-2 me-auto">
+          {{ qualification }}
+        </div>
+        <button class="btn btn-danger" z
+                type="button">X
+        </button>
+      </li>
+    </ol>
+  </div>
+</ng-template>
+
+<ng-template #step3>
+  <div class="form-group">
+
+    <label for="competence" class="mb-2 mt-2 h5">Please add one or more competence:</label>
+    <div class="input-group mb-2">
+      <input type="text" placeholder="Add condition here"
+             class="form-control"
+             name="competence"
+             id="competence"
+             [(ngModel)]="currentCompetence"
+      >
+      <button class="btn btn-secondary" (click)="onCompetenceAdd()">Add</button>
+    </div>
+
+    <ol class="list-group list-group-numbered mt-2" style=" align-items: center">
+      <li *ngFor="let competence of competences"
+          class="list-group-item d-flex justify-content-center mt-2 max-width-style-class"
+      >
+        <div class="ms-2 me-auto multiline-text">
+          {{ competence }}
+        </div>
+        <button class="btn btn-danger"
+                style="align-self: center"
+                type="button">X
+        </button>
+      </li>
+    </ol>
+
+  </div>
+</ng-template>
