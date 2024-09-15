@@ -1,0 +1,51 @@
+/* Style for the box */
+.box {
+  background-color: #c4cdd2;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: box-shadow 0.3s ease;
+}
+
+/* Add a hover effect */
+.box:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on hover */
+}
+
+.info-pair {
+  display: flex;
+  align-items: center;
+}
+
+/* Stack labels and values in a row on larger screens, column on small screens */
+@media (max-width: 576px) {
+  .info-pair {
+    flex-direction: column; /* Stack labels and values vertically on mobile */
+  }
+}
+
+/* Set column styles for small screens */
+@media (max-width: 768px) {
+  .box {
+    margin-bottom: 20px; /* Add space between stacked columns */
+  }
+}
+
+/* Add some spacing between columns and rows on small screens */
+.row.gy-4 {
+  --bs-gutter-y: 1.5rem; /* Vertical gutter for rows */
+}
+
+/* Style for text within the box */
+.text-white {
+  color: #fff;
+}
+
+/* Add some spacing between columns and rows on small screens */
+.row.gy-4 {
+  --bs-gutter-y: 1.5rem; /* Vertical gutter for rows */
+}
+
+.container {
+  max-width: 900px; /* Make container narrower for better presentation */
+}
+

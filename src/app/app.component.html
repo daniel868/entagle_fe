@@ -235,8 +235,9 @@
     <h1>Entangle</h1>
     <nav class="breadcrumb-nav">
       <ul>
-        <li *ngIf="isAuthenticated" ><a routerLink="/main"routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Conditions</a></li>
-        <li *ngIf="isAuthenticated"><a routerLink="/add" routerLinkActive="active">Condition</a>
+        <li *ngIf="isAuthenticated"><a routerLink="/main" routerLinkActive="active"
+                                       [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
+        <li *ngIf="isAuthenticated"><a routerLink="/add" routerLinkActive="active">Conditions and Goals</a>
         </li>
       </ul>
     </nav>
