@@ -6,7 +6,10 @@ export const LoginStartAction = createAction('[AUTH] Login Start', props<{
 }>())
 export const LoginFinishAction = createAction('[AUTH] Login Finish', props<{
   token: string,
-  username:string
+  username: string,
+  expirationDate: Date,
+  accountActivate: boolean,
+  userEmail:string
 }>())
 
 export const RegisterStartAction = createAction('[Auth] Register Start', props<{
@@ -14,10 +17,20 @@ export const RegisterStartAction = createAction('[Auth] Register Start', props<{
   password: string,
   email: string,
   qualification: string[],
-  competences: string[]
+  competences: string[],
 }>());
 
 export const RegisterFinishAction = createAction('[Auth] Register Finish', props<{
   token: string,
-  username:string
+  username: string,
+  accountActivate: boolean,
+  userEmail:string
 }>())
+
+export const EmailValidationAction = createAction('[Auth] Email Validation', props<{
+  emailToken: string
+}>())
+
+export const LogoutAction = createAction('[Auth] Logout Action')
+
+export const AutoLoginAction = createAction('[Auth] AutoLogin Action')

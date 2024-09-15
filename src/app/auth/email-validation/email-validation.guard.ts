@@ -1,11 +1,11 @@
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {map, Observable, take} from "rxjs";
 import {Injectable} from "@angular/core";
-import {AppState} from "../state/app.reducer";
 import {Store} from "@ngrx/store";
+import {AppState} from "../../state/app.reducer";
+import {map, Observable, take} from "rxjs";
 
 @Injectable({providedIn: 'root'})
-export class AuthGuard implements CanActivate {
+export class EmailValidationGuard implements CanActivate {
 
 
   constructor(private router: Router,
@@ -15,10 +15,17 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean | UrlTree {
+    console.log(JSON.stringify(route.queryParams));
     return this.store.select('auth').pipe(
       take(1),
       map(authState => {
-        if (!!authState.user && authState.accountActivate) {
+        let emailToken = route.queryParams['emailToken']
+        if (!!emailToken) {
+          return true;
+        }
+
+        const isAuth = !!authState.user;
+        if (isAuth) {
           return true;
         }
         return this.router.createUrlTree(['/auth'])
@@ -26,4 +33,3 @@ export class AuthGuard implements CanActivate {
     );
   }
 }
-

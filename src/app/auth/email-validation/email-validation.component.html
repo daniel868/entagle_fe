@@ -1,0 +1,15 @@
+<div class="row-cols-1">
+  <div class="email-validation-container  justify-content-center">
+    <div class="email-validation-message">
+      <h2>Email Verification Sent!</h2>
+      <p>We have sent a verification link to <strong>{{ authEmail }}</strong>. Please check your inbox and click on the
+        link to verify your email address.</p>
+      <p>If you haven't received the email, please check your spam folder or try resending the link below.</p>
+    </div>
+
+    <div class="actions d-flex justify-content-evenly" >
+      <button class="btn btn-primary" (click)="resendEmail()">Resend Verification Email</button>
+      <button class="btn btn-secondary" (click)="goToLogin()">Back to Login</button>
+    </div>
+  </div>
+</div>
