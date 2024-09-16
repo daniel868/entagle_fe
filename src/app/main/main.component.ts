@@ -3,6 +3,7 @@ import {AppState} from "../state/app.reducer";
 import {Store} from "@ngrx/store";
 import {Subscription} from "rxjs";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FetchUserInfoAction} from "../state/userInfo/userInfo.actions";
 
 @Component({
   selector: 'app-main',
@@ -30,10 +31,11 @@ export class MainComponent implements OnInit, OnDestroy {
         if (!!response.user) {
           this.username = response.user;
         }
-        if (!!response.email){
+        if (!!response.email) {
           this.email = response.email;
         }
-      })
+      });
+    this.store.dispatch(FetchUserInfoAction());
   }
 
   ngOnDestroy(): void {
