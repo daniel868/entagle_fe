@@ -195,7 +195,7 @@ export class AuthEffects {
           expiresInSecond: number,
           accountActivate: boolean,
           userEmail: string,
-        }>(`${environment.baseUrL}/auth/activate`, {}, {params: queryParams})
+        }>(`${environment.baseUrL}/auth/activate`, {emailToken: action.emailToken})
       }),
       map((response) => {
         const expirationDate = new Date(new Date().getTime() + (response.expiresInSecond * 1000));

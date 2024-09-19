@@ -10,10 +10,7 @@ export const bearerTokenInterceptor: HttpInterceptorFn = (req, next) => {
   return store.select('auth').pipe(
     take(1),
     exhaustMap(authState => {
-      console.log("Intercept request");
       if (!!authState.user && authState.accountActivate && !!authState.token) {
-        console.log("Intercept request and add bearer token");
-
         let newRequest = req.clone({
           setHeaders: {
             Authorization: `Bearer ${authState.token}`,

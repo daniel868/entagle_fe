@@ -1,5 +1,5 @@
 import {createReducer, on} from "@ngrx/store";
-import {LoginFinishAction, RegisterFinishAction, RegisterStartAction} from "./auth.actions";
+import {LoginFinishAction, LogoutAction, RegisterFinishAction, RegisterStartAction} from "./auth.actions";
 
 export interface AuthState {
   user: string | null;
@@ -19,7 +19,7 @@ const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(LoginFinishAction, (state, {token, username,accountActivate, userEmail}) => {
+  on(LoginFinishAction, (state, {token, username, accountActivate, userEmail}) => {
     console.log("Login reducer called");
     return {
       ...state,
@@ -38,5 +38,14 @@ export const authReducer = createReducer(
       accountActivate: accountActivate,
       email: userEmail
     };
+  }),
+  on(LogoutAction, (state) => {
+    return {
+      ...state,
+      user: null,
+      token: null,
+      email: null,
+      accountActivate: false
+    }
   })
 );
