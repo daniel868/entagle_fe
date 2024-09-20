@@ -20,6 +20,7 @@
            [(ngModel)]="password"
            (ngModelChange)="onPasswordChanged($event)"
            required>
+    <button class="btn btn-link p-0 text-primary d-flex mt-2" (click)="onForgetButtonClick()">Forget password</button>
     <div class="row justify-content-around mt-3">
       <div class="col-2">
         <button class="btn btn-success" (click)="onLoginClicked()">Login</button>
@@ -28,6 +29,7 @@
         <button class="btn btn-info" (click)="onRegisterClicked()">Register</button>
       </div>
     </div>
+
   </form>
 
 </div>

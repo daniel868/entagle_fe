@@ -3,6 +3,7 @@ import {AppState} from "../../state/app.reducer";
 import {Store} from "@ngrx/store";
 import {FormsModule} from "@angular/forms";
 import {LoginStartAction} from "../../state/auth/auth.actions";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent {
   username: string;
   password: string;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,
+              private router: Router) {
   }
 
   onRegisterClicked() {
@@ -28,7 +30,6 @@ export class LoginComponent {
   }
 
   onLoginClicked() {
-    console.log("LoginStartAction dispatched")
     this.store.dispatch(LoginStartAction({username: this.username, password: this.password}))
   }
 
@@ -38,5 +39,8 @@ export class LoginComponent {
 
   onPasswordChanged(newValue: string) {
     this.password = newValue;
+  }
+  onForgetButtonClick(){
+    this.router.navigate(['/reset-password-step1'])
   }
 }

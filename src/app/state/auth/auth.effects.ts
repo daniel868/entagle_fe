@@ -5,7 +5,7 @@ import {
   AutoLoginAction, EmailValidationAction,
   LoginFinishAction,
   LoginStartAction,
-  LogoutAction,
+  LogoutAction, PasswordResetStep1,
   RegisterFinishAction,
   RegisterStartAction
 } from "./auth.actions";
@@ -13,6 +13,7 @@ import {map, switchMap, tap} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {AuthService} from "../../auth/auth.service";
+import {GenericSuccessAction} from "../shared/shared.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -220,6 +221,20 @@ export class AuthEffects {
           accountActivate: response.accountActivate,
           userEmail: response.userEmail
         });
+      })
+    ));
+
+  passwordResetStep1Effect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PasswordResetStep1),
+      switchMap((action) => {
+        return this.httpClient.post<{ emailSend: boolean }>(`${environment.baseUrL}/auth/sendResetPasswordLink`, {}, {
+          params: new HttpParams().append('emailAddress', action.emailAddress)
+        });
+      }),
+      map((response) => {
+        console.log("Response: " + response);
+        return GenericSuccessAction({message: 'test'});
       })
     ))
 }
