@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {BsModalRef} from "ngx-bootstrap/modal";
 
 @Component({
   selector: 'app-generic-success-modal',
@@ -11,4 +12,11 @@ export class GenericSuccessModalComponent {
 
   @Input()
   message: string;
+
+  constructor(private bsModalRef: BsModalRef) {
+  }
+
+  closeModal() {
+    this.bsModalRef.hide();
+  }
 }

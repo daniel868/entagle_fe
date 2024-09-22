@@ -35,6 +35,10 @@ export const PasswordResetStep1 = createAction('[Auth] Password Reset Step1',
   props<{ emailAddress: string }>()
 );
 
+export const PasswordResetStep2Action = createAction('[Auth] Password Reset Step2',
+  props<{ emailToken: string; newPassword: string }>()
+);
+
 export const LogoutAction = createAction('[Auth] Logout Action')
 
 export const AutoLoginAction = createAction('[Auth] AutoLogin Action')

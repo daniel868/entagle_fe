@@ -5,15 +5,15 @@ import {
   AutoLoginAction, EmailValidationAction,
   LoginFinishAction,
   LoginStartAction,
-  LogoutAction, PasswordResetStep1,
+  LogoutAction, PasswordResetStep1, PasswordResetStep2Action,
   RegisterFinishAction,
   RegisterStartAction
 } from "./auth.actions";
-import {map, switchMap, tap} from "rxjs";
+import {catchError, map, of, switchMap, tap, throwError} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {AuthService} from "../../auth/auth.service";
-import {GenericSuccessAction} from "../shared/shared.actions";
+import {GenericFailedAction, GenericSuccessAction} from "../shared/shared.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -39,32 +39,36 @@ export class AuthEffects {
         }>(`${environment.baseUrL}/auth/login`, {
           username: action.username,
           password: action.password
-        })
-      }),
-      map(action => {
-        const expirationDate = new Date(new Date().getTime() + (action.expiresInSecond * 1000));
+        }).pipe(
+          map(response => {
+            const expirationDate = new Date(new Date().getTime() + (response.expiresInSecond * 1000));
 
-        const user = {
-          "username": action.username,
-          "token": action.token,
-          "expirationDate": expirationDate,
-          "accountActivate": action.accountActivate,
-          "userEmail": action.userEmail
-        }
+            const user = {
+              "username": response.username,
+              "token": response.token,
+              "expirationDate": expirationDate,
+              "accountActivate": response.accountActivate,
+              "userEmail": response.userEmail
+            }
 
-        this.authService.setLogoutTimer(action.expiresInSecond * 1000);
+            this.authService.setLogoutTimer(response.expiresInSecond * 1000);
 
-        localStorage.setItem('userData', JSON.stringify(user));
+            localStorage.setItem('userData', JSON.stringify(user));
 
 
-        return LoginFinishAction({
-          token: action.token,
-          username: action.username,
-          expirationDate: expirationDate,
-          accountActivate: action.accountActivate,
-          userEmail: action.userEmail
-        });
-
+            return LoginFinishAction({
+              token: response.token,
+              username: response.username,
+              expirationDate: expirationDate,
+              accountActivate: response.accountActivate,
+              userEmail: response.userEmail
+            });
+          }),
+          catchError((error) => {
+            console.log("Error: " + JSON.stringify(error));
+            return of(GenericFailedAction({message: "Invalid username or password"}))
+          })
+        )
       })
     )
   )
@@ -237,4 +241,25 @@ export class AuthEffects {
         return GenericSuccessAction({message: 'test'});
       })
     ))
+
+  passwordResetStep2Effect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PasswordResetStep2Action),
+      switchMap((action) => {
+        return this.httpClient.post<{ passwordChanged: boolean }>(`${environment.baseUrL}/auth/resetAccountPassword`,
+          {
+            emailToken: action.emailToken,
+            newPassword: action.newPassword
+          })
+      }),
+      tap((response) => {
+        if (response.passwordChanged) {
+          this.router.navigate(['/auth'])
+        }
+      }),
+      map((response) => {
+        return GenericSuccessAction({message: "Password successfully changed"});
+      })
+    )
+  )
 }

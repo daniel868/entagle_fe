@@ -7,6 +7,7 @@ import {EmailValidationComponent} from "./auth/email-validation/email-validation
 import {EmailValidationAction} from "./state/auth/auth.actions";
 import {EmailValidationGuard} from "./auth/email-validation/email-validation.guard";
 import {ResetPasswordStep1Component} from "./auth/reset-password/reset-password-step-1/reset-password-step-1.component";
+import {ResetPasswordStep2Component} from "./auth/reset-password/reset-password-step-2/reset-password-step-2.component";
 
 export const routes: Routes = [
   {
@@ -35,5 +36,9 @@ export const routes: Routes = [
   {
     path: 'reset-password-step1',
     component: ResetPasswordStep1Component
+  },
+  {
+    path:'reset-password-step2',
+    component: ResetPasswordStep2Component
   }
 ];

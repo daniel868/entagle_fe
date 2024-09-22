@@ -30,6 +30,7 @@ export class LoginComponent {
   }
 
   onLoginClicked() {
+    console.log("Login button clicked: " + this.username)
     this.store.dispatch(LoginStartAction({username: this.username, password: this.password}))
   }
 
