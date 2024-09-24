@@ -237,8 +237,7 @@ export class AuthEffects {
         });
       }),
       map((response) => {
-        console.log("Response: " + response);
-        return GenericSuccessAction({message: 'test'});
+        return GenericSuccessAction({message: 'Email successfully sent'});
       })
     ))
 
@@ -250,15 +249,22 @@ export class AuthEffects {
           {
             emailToken: action.emailToken,
             newPassword: action.newPassword
+          }).pipe(
+          tap((response) => {
+            if (response.passwordChanged) {
+              this.router.navigate(['/auth'])
+            }
+          }),
+          map((response: { passwordChanged: boolean }) => {
+            if (response.passwordChanged) {
+              return GenericSuccessAction({message: "Password successfully changed"});
+            }
+            return GenericFailedAction({message: "Error occurred while changing password. Try again later!"});
+          }),
+          catchError((error) => {
+            return of(GenericFailedAction({message: "Error occurred while changing password. Try again later!"}))
           })
-      }),
-      tap((response) => {
-        if (response.passwordChanged) {
-          this.router.navigate(['/auth'])
-        }
-      }),
-      map((response) => {
-        return GenericSuccessAction({message: "Password successfully changed"});
+        )
       })
     )
   )

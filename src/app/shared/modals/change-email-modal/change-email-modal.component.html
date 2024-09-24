@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h6 class="modal-title">Modify email</h6>
+  <button type="button" class="btn-close"
+          (click)="closeModal()">
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="emailForm" (ngSubmit)="changeEmail()">
+    <label for="email" class="mb-2 mt-2 h5">Email:</label>
+    <input class="form-control"
+           placeholder="New Email"
+           type="text"
+           required
+           id="email"
+           formControlName="email">
+    <button class="btn btn-primary mt-3"
+            type="submit">
+      Modify
+    </button>
+  </form>
+</div>

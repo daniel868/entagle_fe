@@ -7,6 +7,8 @@ import {FetchUserInfoAction} from "../state/userInfo/userInfo.actions";
 import {NgForOf} from "@angular/common";
 import {ChangeUsernameModalComponent} from "../shared/modals/change-username-modal/change-username-modal.component";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
+import {ChangeEmailModalComponent} from "../shared/modals/change-email-modal/change-email-modal.component";
+import {ChangePasswordModalComponent} from "../shared/modals/change-password-modal/change-password-modal.component";
 
 @Component({
   selector: 'app-main',
@@ -79,5 +81,13 @@ export class MainComponent implements OnInit, OnDestroy {
     if (this.currentModal) {
       this.currentModal.hide();
     }
+  }
+
+  openEmailModal() {
+    this.currentModal = this.modalService.show(ChangeEmailModalComponent);
+  }
+
+  openPasswordModal() {
+    this.currentModal = this.modalService.show(ChangePasswordModalComponent);
   }
 }

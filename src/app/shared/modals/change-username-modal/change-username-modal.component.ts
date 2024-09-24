@@ -28,7 +28,6 @@ export class ChangeUsernameModalComponent implements OnInit {
   }
 
   closeModal() {
-    console.log("close modal called");
     this.closeEventEmitter.emit(true);
   }
 
