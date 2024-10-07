@@ -1,9 +1,9 @@
 export class Treatment {
-  public category:string;
-  public treatment:string;
+  public category: string;
+  public description: string;
 
-  constructor(category: string, treatment: string) {
+  constructor(category: string, description: string) {
     this.category = category;
-    this.treatment = treatment;
+    this.description = description;
   }
 }

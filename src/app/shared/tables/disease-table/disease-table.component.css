@@ -1,0 +1,60 @@
+/* Floating Island Effect for Rows with Gray Tones */
+.floating-card {
+  background-color: #f0f0f0;  /* Light gray background for the floating card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);  /* Softer shadow effect */
+  border-radius: 12px;  /* Rounded corners for card-like appearance */
+  padding: 15px;  /* Add space inside the card */
+  margin-bottom: 15px;  /* Spacing between rows */
+  transition: transform 0.2s ease;  /* Smooth hover effect */
+}
+
+/* Hover effect to make the card float slightly */
+.floating-card:hover {
+  transform: translateY(-5px);  /* Move the card upwards when hovered */
+  background-color: #e0e0e0;  /* Slightly darker gray on hover */
+}
+
+/* Table Styling */
+.table {
+  background-color: transparent;  /* Keep the table background transparent */
+  border-collapse: separate;
+}
+
+/* Icon Styling for expand/collapse */
+.expand-icon {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+/* Treatment List Styling (also part of floating effect) */
+.floating-list-item {
+  background-color: #e9ecef;  /* Light gray background for treatments */
+  border: 1px solid #ced4da;  /* Border color changed to soft gray */
+  margin-bottom: 10px;
+  border-radius: 8px;
+  padding: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.floating-list-item:hover {
+  background-color: #dee2e6;  /* Darker gray on hover */
+}
+
+/* Category Header */
+.category-header {
+  color: #007bff;  /* Keep blue for category header */
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* General Table Spacing */
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+/* Expanded row background */
+.expanded-row td {
+  background-color: transparent;
+}

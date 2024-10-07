@@ -8,6 +8,7 @@ import {EmailValidationAction} from "./state/auth/auth.actions";
 import {EmailValidationGuard} from "./auth/email-validation/email-validation.guard";
 import {ResetPasswordStep1Component} from "./auth/reset-password/reset-password-step-1/reset-password-step-1.component";
 import {ResetPasswordStep2Component} from "./auth/reset-password/reset-password-step-2/reset-password-step-2.component";
+import {DiseaseTableComponent} from "./shared/tables/disease-table/disease-table.component";
 
 export const routes: Routes = [
   {
@@ -22,7 +23,7 @@ export const routes: Routes = [
   },
   {
     path: 'add',
-    component: PatientComponent
+    component: DiseaseTableComponent
   },
   {
     path: 'auth',
@@ -38,7 +39,7 @@ export const routes: Routes = [
     component: ResetPasswordStep1Component
   },
   {
-    path:'reset-password-step2',
+    path: 'reset-password-step2',
     component: ResetPasswordStep2Component
   }
 ];
