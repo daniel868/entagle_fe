@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <!-- ng-container allows us to group multiple tr tags under one loop -->
-    <ng-container *ngFor="let disease of diseaseData.payload; let i = index">
+    <ng-container *ngFor="let disease of transformedData; let i = index">
       <!-- Disease Row (Floating Island Effect) -->
       <tr class="disease-row">
         <td>
@@ -27,11 +27,11 @@
         <td colspan="2">
           <div class="floating-card">
             <!-- Iterate over each treatment category (D1, D2, etc.) -->
-            <div *ngFor="let key of Object.keys(disease.treatments)" class="mt-3">
+            <div *ngFor="let key of getRowKeys(disease.diseaseName)" class="mt-3">
               <h5 class="category-header">{{ key }}</h5>
               <ul class="list-group">
                 <!-- Iterate over each treatment in the category -->
-                <li *ngFor="let treatment of disease.treatments[key]" class="list-group-item floating-list-item">
+                <li *ngFor="let treatment of disease.treatments.get(key)" class="list-group-item floating-list-item">
                   {{ treatment.description }}
                 </li>
               </ul>

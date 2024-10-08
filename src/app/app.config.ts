@@ -11,13 +11,14 @@ import {UserInfoEffects} from "./state/userInfo/userInfo.effects";
 import {bearerTokenInterceptor} from "./shared/bearer-token.interceptor";
 import {SharedEffects} from "./state/shared/shared.effects";
 import {BsModalService} from "ngx-bootstrap/modal";
+import {MedicalEffects} from "./state/medical/medical.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({eventCoalescing: true}),
     provideHttpClient(withInterceptors([bearerTokenInterceptor])),
     provideRouter(routes),
     provideStore(appReducer),
-    provideEffects([AuthEffects, UserInfoEffects, SharedEffects]),
+    provideEffects([AuthEffects, UserInfoEffects, SharedEffects, MedicalEffects]),
     BsModalService
   ],
 };

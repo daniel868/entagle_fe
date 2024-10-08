@@ -2,6 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {Disease} from "../../../model/disease";
 import {Treatment} from "../../../model/treatment";
+import {AppState} from "../../../state/app.reducer";
+import {Store} from "@ngrx/store";
+import {map} from "rxjs";
+import {PageableGenericResponse} from "../../pageable/pageable-generic-response";
+import {FetchUserDiseaseAction} from "../../../state/medical/medical.action";
+import {Pageable} from "../../pageable/pageable";
 
 @Component({
   selector: 'app-disease-table',
@@ -21,11 +27,30 @@ export class DiseaseTableComponent implements OnInit {
   totalCount: number;
   totalPages: number;
 
-  diseaseData: any;
+  transformedData: Disease[] = [];
+
   expandedRows: Set<number> = new Set();
 
+  rowsKey: Map<string, Iterable<string>> = new Map<string, string[]>();
+
+  constructor(private store: Store<AppState>) {
+  }
+
   ngOnInit(): void {
-    this.fetchData();
+    this.store.dispatch(FetchUserDiseaseAction({
+        pagination: {
+          page: 1, size: 10
+        }
+      }
+    ));
+
+    this.store.select('medical')
+      .pipe(map(state => state.userDisease))
+      .subscribe(response => {
+        if (!!response) {
+          this.updateTable(response)
+        }
+      });
   }
 
   toggleRow(index: number): void {
@@ -36,55 +61,27 @@ export class DiseaseTableComponent implements OnInit {
     }
   }
 
+  getRowKeys(diseaseName: string) {
+    return this.rowsKey.get(diseaseName);
+  }
+
+
   isRowExpanded(index: number): boolean {
     return this.expandedRows.has(index);
   }
 
-  transformedData: Disease[] = [];
-
-  fetchData() {
-    this.diseaseData = {
-      "payload": [
-        {
-          "diseaseName": "disease1",
-          "treatments": {
-            "D1": [
-              {"description": "treatment1_3"},
-              {"description": "treatment1_1"}
-            ],
-            "D2": [
-              {"description": "treatment1_2"}
-            ]
-          }
-        },
-        {
-          "diseaseName": "disease2",
-          "treatments": {
-            "D1": [
-              {"description": "treatment2_1"}
-            ]
-          }
-        }
-      ],
-      "pageSize": 10,
-      "currentPage": 2,
-      "nextPage": 3,
-      "totalCount": 100
-    };
-    this.updateTable(this.diseaseData);
-  }
-
-  updateTable(data: any): void {
+  updateTable(data: PageableGenericResponse<Disease>): void {
     this.transformedData = [];
 
     data.payload.forEach((disease: any) => {
       let treatmentsMap: Map<string, Treatment[]> = new Map<string, Treatment[]>();
+      this.rowsKey.set(disease.diseaseName, Object.keys(disease.treatments))
       Object.keys(disease.treatments).forEach(treatmentKey => {
         const treatments = disease.treatments[treatmentKey];
 
         let diseaseTreatments: Treatment[] = []
         treatments.forEach((treatment: any) => {
-          diseaseTreatments.push(new Treatment('', treatment));
+          diseaseTreatments.push(new Treatment('', treatment.description));
         });
         treatmentsMap.set(treatmentKey, diseaseTreatments);
 
@@ -94,7 +91,6 @@ export class DiseaseTableComponent implements OnInit {
         treatments: treatmentsMap
       });
     });
-
     // Set pagination values
     this.pageSize = data.pageSize;
     this.currentPage = data.currentPage;
@@ -107,7 +103,8 @@ export class DiseaseTableComponent implements OnInit {
 
 
   changePage(pageNumber: number) {
-
+    let newPageable: Pageable = {page: pageNumber, size: this.pageSize};
+    this.store.dispatch(FetchUserDiseaseAction({pagination: newPageable}));
   }
 
   protected readonly Object = Object;
