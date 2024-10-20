@@ -34,12 +34,14 @@
           </thead>
           <tbody>
           <ng-container *ngFor="let treatment of disease.treatments">
-            <td class="floating-list-item">
-              {{ treatment.specialistName }}
-            </td>
-            <td class="floating-list-item" *ngFor="let item of treatment.items">
-              {{ item.description ? item.description : '' }}
-            </td>
+            <tr>
+              <td class="floating-list-item">
+                {{ treatment.specialistName }}
+              </td>
+              <td class="floating-list-item" *ngFor="let item of treatment.items">
+                {{ item.description ? item.description : '' }}
+              </td>
+            </tr>
           </ng-container>
           </tbody>
         </table>
