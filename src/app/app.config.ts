@@ -12,6 +12,7 @@ import {bearerTokenInterceptor} from "./shared/bearer-token.interceptor";
 import {SharedEffects} from "./state/shared/shared.effects";
 import {BsModalService} from "ngx-bootstrap/modal";
 import {MedicalEffects} from "./state/medical/medical.effects";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({eventCoalescing: true}),
@@ -19,6 +20,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideStore(appReducer),
     provideEffects([AuthEffects, UserInfoEffects, SharedEffects, MedicalEffects]),
-    BsModalService
+    BsModalService, provideAnimationsAsync()
   ],
 };

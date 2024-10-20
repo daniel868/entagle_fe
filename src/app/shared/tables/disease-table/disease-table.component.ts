@@ -8,6 +8,7 @@ import {map} from "rxjs";
 import {PageableGenericResponse} from "../../pageable/pageable-generic-response";
 import {FetchUserDiseaseAction} from "../../../state/medical/medical.action";
 import {Pageable} from "../../pageable/pageable";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-disease-table',
@@ -15,7 +16,8 @@ import {Pageable} from "../../pageable/pageable";
   imports: [
     NgForOf,
     NgIf,
-    NgClass
+    NgClass,
+    MatPaginator
   ],
   templateUrl: './disease-table.component.html',
   styleUrl: './disease-table.component.css'
@@ -31,7 +33,7 @@ export class DiseaseTableComponent implements OnInit {
 
   expandedRows: Set<number> = new Set();
 
-  rowsKey: Map<string, Iterable<string>> = new Map<string, string[]>();
+  diseaseCategories: string[] = ['Specialist', 'D1 Physical', 'D2 Social', 'D3 Occupational', 'D4 Emotional', 'D5 Intellectual', 'D6 Environmental', 'D7 Spiritual', 'Remedies'];
 
   constructor(private store: Store<AppState>) {
   }
@@ -61,11 +63,6 @@ export class DiseaseTableComponent implements OnInit {
     }
   }
 
-  getRowKeys(diseaseName: string) {
-    return this.rowsKey.get(diseaseName);
-  }
-
-
   isRowExpanded(index: number): boolean {
     return this.expandedRows.has(index);
   }
@@ -73,24 +70,7 @@ export class DiseaseTableComponent implements OnInit {
   updateTable(data: PageableGenericResponse<Disease>): void {
     this.transformedData = [];
 
-    data.payload.forEach((disease: any) => {
-      let treatmentsMap: Map<string, Treatment[]> = new Map<string, Treatment[]>();
-      this.rowsKey.set(disease.diseaseName, Object.keys(disease.treatments))
-      Object.keys(disease.treatments).forEach(treatmentKey => {
-        const treatments = disease.treatments[treatmentKey];
-
-        let diseaseTreatments: Treatment[] = []
-        treatments.forEach((treatment: any) => {
-          diseaseTreatments.push(new Treatment('', treatment.description));
-        });
-        treatmentsMap.set(treatmentKey, diseaseTreatments);
-
-      });
-      this.transformedData.push({
-        diseaseName: disease.diseaseName,
-        treatments: treatmentsMap
-      });
-    });
+    this.transformedData = data.payload;
     // Set pagination values
     this.pageSize = data.pageSize;
     this.currentPage = data.currentPage;
@@ -101,9 +81,11 @@ export class DiseaseTableComponent implements OnInit {
     this.totalPages = Math.ceil(this.totalCount / this.pageSize);
   }
 
+  onPageChange(event: PageEvent) {
+    this.currentPage = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
 
-  changePage(pageNumber: number) {
-    let newPageable: Pageable = {page: pageNumber, size: this.pageSize};
+    let newPageable: Pageable = {page: this.currentPage, size: this.pageSize};
     this.store.dispatch(FetchUserDiseaseAction({pagination: newPageable}));
   }
 
