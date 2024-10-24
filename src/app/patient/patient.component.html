@@ -1,5 +1,6 @@
-<form class="form-container" (ngSubmit)="onSubmit()">
+<form class="form-container shadow p-4 mb-4 bg-white rounded" (ngSubmit)="onSubmit()">
   <div class="form-group">
+    <!-- Condition Input -->
     <label for="inputSituation" class="mb-1 h5">Condition:</label>
     <div class="input-group mb-3">
       <input type="text" placeholder="Add condition here"
@@ -10,73 +11,63 @@
              (ngModelChange)="onSituationInputChange($event)"
              #situationInputRef="ngModel"
       >
-      <button *ngIf="situationInputRef.dirty  && displayAddSituationBtn"
-              class="btn btn-outline-secondary"
+      <button *ngIf="situationInputRef.dirty && displayAddSituationBtn"
+              class="btn btn-primary"
               type="button"
               (click)="onAddSituationBtnClicked()">Add
       </button>
     </div>
 
+    <!-- Dropdown for suggestions -->
     <ul class="dropdown-menu show" *ngIf="filteredSituation.length >0">
       <li class="dropdown-item" *ngFor="let situation of filteredSituation"
           (click)="onSituationDropdownClick(situation)">{{ situation }}
       </li>
     </ul>
 
+    <!-- Treatment Input -->
     <label class="mb-2 h5">Treatment:</label>
     <div class="input-group mb-2">
       <input type="text" placeholder="Add treatment here"
-             class="form-control"
+             class="form-control "
              name="circumstance+Input"
              [(ngModel)]="circumstance"
              id="circumstanceInput"/>
       <div class="btn-group">
-        <button class="btn btn-outline-secondary"
+        <button class="btn btn-outline-secondary dropdown-toggle"
                 (click)="onCategoryBtnClicked()"
                 type="button">{{ selectedCategory }}
         </button>
-        <ul class="dropdown-menu show" *ngIf="showCategoryDropdown"
-            data-popper-placement="bottom-start"
-            style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 40px);">
-          <li class="dropdown-item" *ngFor="let category of Mocks.qualification"
-              (click)="onCategoryChange(category)"
-          >{{ category }}
+        <ul class="dropdown-menu show" *ngIf="showCategoryDropdown">
+          <li class="dropdown-item" *ngFor="let category of filteredCategory"
+              (click)="onCategoryChange(category)">{{ category }}
           </li>
         </ul>
 
-
-        <button class="btn btn-outline-secondary"
-                (click)="onAddCircumstanceBtnClicked()"
-                type="button">Add
-        </button>
+        <button class="btn btn-success" (click)="onAddCircumstanceBtnClicked()" type="button">Add</button>
       </div>
     </div>
 
-
-    <ol class="list-group list-group-numbered mt-2">
+    <!-- List of treatments -->
+    <ol class="list-group list-group-numbered mt-3 shadow-sm">
       <li *ngFor="let circumstance of treatments"
-          class="list-group-item d-flex justify-content-between align-items-start mt-2">
+          class="list-group-item d-flex justify-content-between align-items-center bg-light">
         <div class="ms-2 me-auto multiline-text">
-          {{circumstance.category}} - {{ circumstance.description }}
+          <strong>{{circumstance.category}}:</strong> {{ circumstance.description }}
         </div>
-        <button class="btn btn-danger btn-danger-circ"
-                (click)="onDeleteCircumstanceBtnClicked(circumstance)"
-                type="button">X
+        <button type="button" class="btn-close"
+                (click)="onDeleteCircumstanceBtnClicked(circumstance)">
         </button>
       </li>
     </ol>
 
-    <div class="row justify-content-center mt-3">
-      <div class="col-4">
-        <button class="btn btn-outline-success "
-                type="submit">Save
-        </button>
+    <!-- Action Buttons -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-5">
+        <button class="btn btn-outline-success btn-lg btn-block" type="submit">Save</button>
       </div>
-
-      <div class="col-4">
-        <button class="btn btn-outline-danger"
-                type="button">Cancel
-        </button>
+      <div class="col-5">
+        <button class="btn btn-outline-danger btn-lg btn-block" type="button">Cancel</button>
       </div>
     </div>
   </div>
@@ -86,25 +77,85 @@
   .form-container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #fff;
   }
 
-  .multiline-text {
-    /*width: 100%;*/
-    max-width: 600px;
-    /*padding: 10px;*/
-    /*border: 1px solid #ccc;*/
-    white-space: pre-wrap;
-    word-break: break-word;
+  .input-group {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .form-control {
+    height: 45px;
+    font-size: 16px;
+  }
+
+  .btn-group .btn {
+    margin-left: 10px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+  }
+
+  .dropdown-menu {
+    margin-top: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+  }
+
+  .list-group-item {
+    background-color: #f9f9f9;
+    border-color: #eee;
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .list-group-item:hover {
+    background-color: #f1f1f1;
   }
 
   .btn-danger-circ {
-    display: flex;
-    align-self: center;
-
+    font-size: 12px;
+    padding: 5px 10px;
   }
 
+  /* Button and input hover effects */
+  .btn:hover {
+    opacity: 0.9;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+
+  /* Spacing for save/cancel buttons */
+  .btn-lg {
+    padding: 10px 20px;
+  }
 </style>

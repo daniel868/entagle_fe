@@ -6,11 +6,12 @@
   padding: 15px;  /* Add space inside the card */
   margin-bottom: 15px;  /* Spacing between rows */
   transition: transform 0.2s ease;  /* Smooth hover effect */
+  position: relative;
 }
 
 /* Hover effect to make the card float slightly */
 .floating-card:hover {
-  transform: translateY(-5px);  /* Move the card upwards when hovered */
+  /*transform: translateY(-5px);  !* Move the card upwards when hovered *!*/
   background-color: #e0e0e0;  /* Slightly darker gray on hover */
 }
 
@@ -59,3 +60,81 @@
   background-color: transparent;
 }
 
+.search-input {
+  width: 200px; /* Adjust the width to fit the table header */
+  padding: 5px 30px 5px 10px; /* Padding to leave room for the search icon */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Style for the search icon */
+.search-icon {
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #aaa; /* Light gray to match the input field */
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff; /* Change border color on focus */
+}
+
+.menu-container {
+  position: absolute; /* Position the menu container */
+  right: 10px; /* Adjust the right position */
+  top: 10px; /* Adjust the top position */
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #333; /* Color for the three-dot button */
+}
+
+.dropdown-table-menu {
+  position: absolute;
+  right: 0; /* Aligns the dropdown with the button */
+  top: 30px; /* Adjusts the position below the menu button */
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  min-width: 120px;
+}
+
+/* Style for each item in the dropdown */
+.dropdown-table-item {
+  padding: 10px;
+  display: block;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*.dropdown-item:hover {*/
+/*  background-color: #f1f1f1;*/
+/*}*/
+
+.table-header-container {
+  display: flex;
+  justify-content: space-between; /* Space between search and button */
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f9fa; /* Light background to distinguish it */
+  border-bottom: 1px solid #dee2e6; /* Optional border to mimic table header style */
+}
+
+.btn-primary {
+  background-color: #007bff;  /* Primary color for buttons */
+  border: none;               /* Remove borders */
+  border-radius: 5px;         /* Rounded button corners */
+  padding: 8px 16px;          /* Padding for button */
+  font-size: 14px;            /* Consistent font size */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Button shadow */
+}

@@ -1,10 +1,30 @@
 <div class="container mt-4">
   <h2>Diseases and Treatments</h2>
 
+
+  <div class="table-header-container">
+    <div class="col">
+      <label for="search-input" class="fw-bold">Disease Name</label>
+      <div class="row">
+        <div class="search-container">
+          <input type="text"
+                 id="search-input"
+                 class="search-input"
+                 placeholder="Search..."
+                 [(ngModel)]="searchString"
+                 (ngModelChange)="onSearchStringChange($event)"
+          />
+          <span class="search-icon">🔍</span>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="onAddDisease()">Add disease</button>
+  </div>
+
   <table class="table table-borderless">
     <thead class="thead-dark">
     <tr>
-      <th scope="col">Disease Name</th>
+
     </tr>
     </thead>
     <tbody>
@@ -18,6 +38,18 @@
                 <i class="bi" [ngClass]="isRowExpanded(i) ? 'bi-caret-down-fill' : 'bi-caret-right-fill'"></i>
               </span>
             <span class="ml-2">{{ disease.diseaseName }}</span>
+
+            <div class="menu-container">
+              <button class="menu-btn" (click)="toggleDropdownMenu(i)">
+                &#x22EE; <!-- Unicode character for vertical ellipsis (3 dots) -->
+              </button>
+
+              <div class="dropdown-table-menu" *ngIf="isDropdownMenuOpen(i)" id="dropdownItemRows" #dropdownItemRows>
+                <a class="dropdown-table-item" (click)="onAddNewTreatmentModal(disease.id)">Add new treatment</a>
+                <a class="dropdown-table-item" (click)="onDeleteDiseaseClick(disease.id)">Delete disease</a>
+              </div>
+
+            </div>
           </div>
         </td>
       </tr>

@@ -3,6 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {BsModalRef} from "ngx-bootstrap/modal";
 import {AppState} from "../../../state/app.reducer";
 import {Store} from "@ngrx/store";
+import {ChangeEmailAction} from "../../../state/userInfo/userInfo.actions";
 
 @Component({
   selector: 'app-change-email-modal',
@@ -24,13 +25,15 @@ export class ChangeEmailModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.emailForm = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email]),
     });
   }
 
 
   changeEmail() {
-
+    let newEmail = this.emailForm.get('email')?.value
+    this.store.dispatch(ChangeEmailAction({newEmail: newEmail}));
+    this.closeModal();
   }
 
   closeModal() {

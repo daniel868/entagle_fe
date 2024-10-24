@@ -6,3 +6,16 @@ export const UserInfoActionFinished = createAction('[UserInfo] User Info Action'
   qualification: string[];
   competences: string[];
 }>())
+
+export const ChangeUsernameAction = createAction('[UserInfo] Change Username', props<{
+  newUsername: string
+}>())
+
+export const ChangePasswordAction = createAction('[UserInfo] Change Password', props<{
+  newPassword: string,
+  currentPassword: string
+}>());
+
+export const ChangeEmailAction = createAction('[UserInfo] Change Email', props<{
+  newEmail:string
+}>());

@@ -114,4 +114,8 @@ export class RegisterComponent implements OnInit {
   }
 
   protected readonly Mocks = Mocks;
+
+  onRemoveQualification(qualification: string) {
+    this.qualifications = this.qualifications.filter((current) => current !== qualification)
+  }
 }

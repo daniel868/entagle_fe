@@ -22,9 +22,13 @@ export const routes: Routes = [
     component: MainComponent
   },
   {
-    path: 'add',
+    path: 'disease-and-treatments',
     component: DiseaseTableComponent
   },
+  // {
+  //   path: 'temp',
+  //   component: PatientComponent
+  // },
   {
     path: 'auth',
     component: AuthComponent

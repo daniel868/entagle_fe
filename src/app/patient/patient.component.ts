@@ -24,6 +24,8 @@ export class PatientComponent {
 
   filteredSituation: string[] = []
 
+  filteredCategory: string[] = Mocks.qualification;
+
   situation: string = ''
 
   displayAddSituationBtn: boolean = false
@@ -51,12 +53,12 @@ export class PatientComponent {
 
   onSituationDropdownClick(selectedSituation: string) {
     this.situation = selectedSituation
-    this.filteredSituation = []
+    // this.filteredSituation = []
     this.displayAddSituationBtn = false
   }
 
   onSituationInputChange(input: string) {
-    this.filteredSituation = []
+    // this.filteredSituation = []
     this.displayAddSituationBtn = true
     if (input !== '') {
       this.filteredSituation = this.patientSituations.filter((value) => value.toLowerCase().includes(input.toLowerCase()));
@@ -75,6 +77,8 @@ export class PatientComponent {
   onAddCircumstanceBtnClicked() {
     if (this.circumstance != '') {
       this.treatments.push(new Treatment(this.selectedCategory, this.circumstance))
+      this.filteredCategory = this.filteredCategory.filter((value) => value !== this.selectedCategory)
+      this.selectedCategory = this.filteredCategory[0]
     }
     this.circumstance = ''
   }
