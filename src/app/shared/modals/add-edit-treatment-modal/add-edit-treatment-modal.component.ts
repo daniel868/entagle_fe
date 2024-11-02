@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit} from '@angular/core';
 import {BsModalRef} from "ngx-bootstrap/modal";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
@@ -7,9 +7,11 @@ import {AppState} from "../../../state/app.reducer";
 import {Store} from "@ngrx/store";
 import {
   AddNewDiseaseAction,
-  AddNewTreatmentAction,
+  AddNewTreatmentAction, FetchTreatmentItemAction,
   FetchUserDiseaseAction
 } from "../../../state/medical/medical.action";
+import {Event} from "@angular/router";
+import {debounceTime, map, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-add-edit-treatment-modal',
@@ -23,7 +25,7 @@ import {
   templateUrl: './add-edit-treatment-modal.component.html',
   styleUrl: './add-edit-treatment-modal.component.css'
 })
-export class AddEditTreatmentModalComponent {
+export class AddEditTreatmentModalComponent implements OnInit, OnDestroy {
 
   @Input()
   addDisease: boolean = false;
@@ -37,6 +39,7 @@ export class AddEditTreatmentModalComponent {
   addEditTreatmentForm: FormGroup;
 
   showCategoryDropdown: boolean = false;
+  showItemDropdown: boolean = false;
 
   treatmentType: string[] = ['D1 Physical',
     'D2 Social',
@@ -50,6 +53,12 @@ export class AddEditTreatmentModalComponent {
 
   treatments: TreatmentItem[] = []
 
+  itemTypeEventEmitter: EventEmitter<string> = new EventEmitter<string>();
+  itemTypeSubscription: Subscription;
+
+  availableTreatmentItems: TreatmentItem[];
+  treatmentItemsSubscription: Subscription;
+
   constructor(private bsModalRef: BsModalRef,
               private store: Store<AppState>) {
     this.addEditTreatmentForm = new FormGroup({
@@ -59,7 +68,18 @@ export class AddEditTreatmentModalComponent {
 
   }
 
-  addEditTreatment() {
+  ngOnInit(): void {
+    this.itemTypeSubscription = this.itemTypeEventEmitter.pipe(
+      debounceTime(300)
+    ).subscribe(newValue => {
+      this.store.dispatch(FetchTreatmentItemAction({searchString: newValue}));
+    });
+
+    this.treatmentItemsSubscription = this.store.select('medical').pipe(
+      map((state) => state.treatmentItems)
+    ).subscribe(items => {
+      this.availableTreatmentItems = items;
+    });
 
   }
 
@@ -107,5 +127,32 @@ export class AddEditTreatmentModalComponent {
     }
 
     this.closeModal();
+  }
+
+  onTreatmentItemType() {
+    this.showItemDropdown = true;
+    let value: string = this.addEditTreatmentForm.get('inputTreatmentDescription')?.value;
+    if (value !== "") {
+      this.itemTypeEventEmitter.emit(value)
+    }
+  }
+
+  onItemClick(option: string) {
+    this.showItemDropdown = false;
+    this.addEditTreatmentForm.get('inputTreatmentDescription')?.setValue(option)
+  }
+
+
+  ngOnDestroy(): void {
+    if (this.itemTypeSubscription) {
+      this.itemTypeSubscription.unsubscribe();
+    }
+    if (this.treatmentItemsSubscription) {
+      this.treatmentItemsSubscription.unsubscribe();
+    }
+  }
+
+  getControl(controlName: string) {
+    return this.addEditTreatmentForm.get(controlName)
   }
 }

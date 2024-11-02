@@ -4,7 +4,7 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {BsDropdownConfig} from "ngx-bootstrap/dropdown";
 import {AppState} from "./state/app.reducer";
 import {Store} from "@ngrx/store";
-import {AutoLoginAction} from "./state/auth/auth.actions";
+import {AutoLoginAction, LogoutAction} from "./state/auth/auth.actions";
 import {NgIf} from "@angular/common";
 
 function BsDropdownModule() {
@@ -38,10 +38,13 @@ export class AppComponent implements OnInit {
       .pipe()
       .subscribe(user => {
         this.isAuthenticated = !!user && user.accountActivate;
-    });
+      });
 
     this.store.dispatch(AutoLoginAction());
 
   }
 
+  logout() {
+    this.store.dispatch(LogoutAction())
+  }
 }

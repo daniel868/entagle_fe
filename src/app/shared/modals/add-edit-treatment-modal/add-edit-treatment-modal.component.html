@@ -7,8 +7,7 @@
 </div>
 <div class="modal-body">
   <form class="form-container shadow p-4 mb-4 bg-white rounded"
-        [formGroup]="addEditTreatmentForm"
-        (ngSubmit)="addEditTreatment()">
+        [formGroup]="addEditTreatmentForm">
 
     <ng-container *ngIf="addDisease">
       <label class="mb-2 h5">Condition:</label>
@@ -23,31 +22,41 @@
     </ng-container>
 
     <label class="mb-2 h5">Treatment:</label>
-    <div class="input-group mb-2">
-      <div class="input-group mb-3">
-        <input type="text"
-               placeholder="Add treatment here"
-               class="form-control"
-               formControlName="inputTreatmentDescription"
-               id="inputTreatmentDescription"
-               required>
 
-        <div class="btn-group">
+    <div class="input-group mb-3">
+      <input type="text"
+             placeholder="Add treatment here"
+             class="form-control"
+             formControlName="inputTreatmentDescription"
+             id="inputTreatmentDescription"
+             (input)="onTreatmentItemType()"
+             required>
+
+      <div *ngIf="showItemDropdown && getControl('inputTreatmentDescription')?.value!==''" class="dropdown-container">
+        <ul *ngIf="availableTreatmentItems.length>0" class="dropdown-menu show">
+          <li class="dropdown-item" *ngFor="let option of availableTreatmentItems"
+              (click)="onItemClick(option.description)"
+          >{{ option.description }}
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="btn-group">
         <span class="input-group-btn input-space">
         <button class="btn btn-outline-secondary dropdown-toggle"
                 (click)="onCategoryBtnClicked()"
                 type="button">{{ selectedTreatmentType }}
         </button>
         </span>
-          <ul class="dropdown-menu show" *ngIf="showCategoryDropdown">
-            <li class="dropdown-item" *ngFor="let category of treatmentType"
-                (click)="onTreatmentTypeChange(category)">{{ category }}
-            </li>
-          </ul>
-          <span class="input-group-btn input-space">
+        <ul class="dropdown-menu show" *ngIf="showCategoryDropdown">
+          <li class="dropdown-item" *ngFor="let category of treatmentType"
+              (click)="onTreatmentTypeChange(category)">{{ category }}
+          </li>
+        </ul>
+        <span class="input-group-btn input-space">
         <button class="btn btn-success" type="button" (click)="onAddCircumstanceBtnClicked()">Add</button>
         </span>
-        </div>
       </div>
     </div>
 

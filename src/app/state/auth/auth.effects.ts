@@ -133,7 +133,7 @@ export class AuthEffects {
         ofType(LoginFinishAction),
         tap((action) => {
           if (action.accountActivate) {
-            this.router.navigate(['/'])
+            this.router.navigate(['/main'])
           } else {
             this.router.navigate(['/email-validation']
             )
@@ -157,11 +157,9 @@ export class AuthEffects {
           userEmail: string
         } = userData !== null ? JSON.parse(userData) : null;
 
-        console.log("Userdata from cache: " + JSON.stringify(parseUserData));
 
         if (parseUserData != null) {
           const remainExpirationDateTime = new Date(parseUserData.expirationDate).getTime() - new Date().getTime();
-          console.log("Remain seconds: " + (remainExpirationDateTime / 1000));
           this.authService.setLogoutTimer(remainExpirationDateTime);
           if (parseUserData.accountActivate) {
             return LoginFinishAction({

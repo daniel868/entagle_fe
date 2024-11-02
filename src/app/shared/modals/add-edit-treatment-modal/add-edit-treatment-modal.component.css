@@ -87,3 +87,32 @@ input:focus {
 .input-group-btn.input-space {
   padding-left: 10px;
 }
+
+.input-group {
+  position: relative;
+}
+
+.dropdown-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.dropdown-menu {
+  max-width: 220px;
+  margin: 0;
+  padding: 0;
+  max-height: 200px;  /* Set a max-height if you have many options */
+  overflow-y: auto;   /* Adds scroll if options exceed max height */
+}
+
+.dropdown-item {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}

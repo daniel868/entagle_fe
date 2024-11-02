@@ -4,8 +4,8 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {
   AddNewDiseaseAction,
   AddNewTreatmentAction,
-  DeleteDiseaseAction,
-  FetchUserDiseaseAction,
+  DeleteDiseaseAction, FetchTreatmentItemAction,
+  FetchUserDiseaseAction, TreatmentItemAction,
   UserDiseaseAction
 } from "./medical.action";
 import {catchError, exhaustMap, map, of, switchMap} from "rxjs";
@@ -14,6 +14,7 @@ import {Disease} from "../../model/disease";
 import {environment} from "../../../environments/environment";
 import {GenericSuccessResponse} from "../../shared/generic/generic-success-response";
 import {GenericFailedAction, GenericSuccessAction} from "../shared/shared.actions";
+import {TreatmentItem} from "../../model/treatment-item";
 
 @Injectable()
 export class MedicalEffects {
@@ -99,6 +100,22 @@ export class MedicalEffects {
       }),
       catchError(err => {
         return of(GenericFailedAction({message: "Error deleted disease"}));
+      })
+    )
+  )
+
+  fetchTreatmentItemEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FetchTreatmentItemAction),
+      switchMap((actionProps) => {
+        let queryParams = new HttpParams()
+          .set('searchString', actionProps.searchString)
+        return this.httpClient.get<GenericSuccessResponse<TreatmentItem[]>>(`${environment.baseUrL}/medical/treatmentItems`, {params: queryParams})
+          .pipe(
+            map((response) => {
+              return TreatmentItemAction({items: response})
+            })
+          )
       })
     )
   )

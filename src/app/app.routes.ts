@@ -8,11 +8,12 @@ import {EmailValidationGuard} from "./auth/email-validation/email-validation.gua
 import {ResetPasswordStep1Component} from "./auth/reset-password/reset-password-step-1/reset-password-step-1.component";
 import {ResetPasswordStep2Component} from "./auth/reset-password/reset-password-step-2/reset-password-step-2.component";
 import {DiseaseTableComponent} from "./shared/tables/disease-table/disease-table.component";
+import {HomeComponent} from "./main/home/home.component";
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/main',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {
@@ -22,12 +23,9 @@ export const routes: Routes = [
   },
   {
     path: 'disease-and-treatments',
+    canActivate: [AuthGuard],
     component: DiseaseTableComponent
   },
-  // {
-  //   path: 'temp',
-  //   component: PatientComponent
-  // },
   {
     path: 'auth',
     component: AuthComponent
@@ -44,5 +42,9 @@ export const routes: Routes = [
   {
     path: 'reset-password-step2',
     component: ResetPasswordStep2Component
+  },
+  {
+    path: 'home',
+    component: HomeComponent
   }
 ];
