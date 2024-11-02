@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-import {PatientComponent} from "./patient/patient.component";
 import {AuthComponent} from "./auth/auth.component";
 import {AuthGuard} from "./auth/auth.guard";
 import {MainComponent} from "./main/main.component";

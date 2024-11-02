@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
-import {PatientComponent} from "./patient/patient.component";
-import {PatientRowComponent} from "./patient/patient-row/patient-row.component";
-import {PatientsComponent} from "./patient/patients/patients.component";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {BsDropdownConfig} from "ngx-bootstrap/dropdown";
 import {AppState} from "./state/app.reducer";
@@ -18,9 +15,6 @@ function BsDropdownModule() {
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,
-    PatientComponent,
-    PatientRowComponent,
-    PatientsComponent,
     RouterLink,
     RouterLinkActive, NgIf,
   ],
