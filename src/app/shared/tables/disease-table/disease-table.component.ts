@@ -1,4 +1,13 @@
-import {Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {Disease} from "../../../model/disease";
 import {AppState} from "../../../state/app.reducer";
@@ -14,6 +23,8 @@ import {BsModalService, ModalOptions} from "ngx-bootstrap/modal";
 import {AddEditTreatmentModalComponent} from "../../modals/add-edit-treatment-modal/add-edit-treatment-modal.component";
 import {WarningModalComponent} from "../../modals/warning-modal/warning-modal.component";
 import {FormsModule} from "@angular/forms";
+import {document} from "ngx-bootstrap/utils";
+import {TooltipModule} from "ngx-bootstrap/tooltip";
 
 @Component({
   selector: 'app-disease-table',
@@ -26,12 +37,13 @@ import {FormsModule} from "@angular/forms";
     MatFormField,
     MatInput,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    TooltipModule
   ],
   templateUrl: './disease-table.component.html',
   styleUrl: './disease-table.component.css'
 })
-export class DiseaseTableComponent implements OnInit, OnDestroy {
+export class DiseaseTableComponent implements OnInit, OnDestroy, AfterViewInit {
   pageSize: number;
   currentPage: number;
   nextPage: number;
@@ -44,7 +56,17 @@ export class DiseaseTableComponent implements OnInit, OnDestroy {
 
   dropdownItemRows: Set<number> = new Set();
 
-  diseaseCategories: string[] = ['Specialist', 'D1 Physical', 'D2 Social', 'D3 Occupational', 'D4 Emotional', 'D5 Intellectual', 'D6 Environmental', 'D7 Spiritual', 'Remedies'];
+  diseaseCategories: string[] = ['Specialist',
+    'D1 Physical',
+    'D2 Social',
+    'D3 Occupational',
+    'D4 Emotional',
+    'D5 Intellectual',
+    'D6 Environmental',
+    'D7 Spiritual',
+    'Remedies',
+    'Nutrition',
+    'Other requirements'];
 
   searchString: string = '';
 
@@ -86,6 +108,12 @@ export class DiseaseTableComponent implements OnInit, OnDestroy {
     });
 
   }
+
+  ngAfterViewInit(): void {
+
+  }
+
+
 
   toggleRow(index: number): void {
     if (this.expandedRows.has(index)) {

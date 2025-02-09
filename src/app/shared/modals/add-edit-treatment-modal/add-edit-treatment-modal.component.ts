@@ -47,7 +47,11 @@ export class AddEditTreatmentModalComponent implements OnInit, OnDestroy {
     'D4 Emotional',
     'D5 Intellectual',
     'D6 Environmental',
-    'D7 Spiritual']
+    'D7 Spiritual',
+    'Remedies',
+    'Nutrition',
+    'Other requirements'
+  ]
 
   selectedTreatmentType: string = this.treatmentType[0];
 
@@ -106,6 +110,7 @@ export class AddEditTreatmentModalComponent implements OnInit, OnDestroy {
     this.treatmentType = this.treatmentType.filter((category) => category !== this.selectedTreatmentType);
     this.selectedTreatmentType = this.treatmentType[0];
     this.addEditTreatmentForm.get('inputTreatmentDescription')?.setValue('')
+    console.log("Treatments: " + JSON.stringify(this.treatments));
   }
 
   onDeleteTreatmentCategoryBtn(currentTreatment: TreatmentItem) {
@@ -114,6 +119,7 @@ export class AddEditTreatmentModalComponent implements OnInit, OnDestroy {
   }
 
   onAddTreatment() {
+    console.log("Treatments: " + this.treatments)
     if (this.addDisease) {
       this.store.dispatch(AddNewDiseaseAction({
         diseaseName: this.addEditTreatmentForm.get('inputCondition')?.value,

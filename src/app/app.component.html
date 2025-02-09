@@ -237,12 +237,11 @@
     <div class="row">
       <nav class="breadcrumb-nav">
         <ul>
-          <li *ngIf="!isAuthenticated"><a routerLink="/home" routerLinkActive="active">Home</a></li>
-          <li *ngIf="!isAuthenticated"><a routerLink="/auth" routerLinkActive="active">Admin</a></li>
+          <li *ngIf="!isAuthenticated"><a routerLink="/home" routerLinkActive="active">I'm searching advice</a></li>
+          <li *ngIf="!isAuthenticated"><a routerLink="/auth" routerLinkActive="active">I'm a well-being specialist</a></li>
           <li *ngIf="isAuthenticated"><a routerLink="/main" routerLinkActive="active"
                                          [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
-          <li *ngIf="isAuthenticated"><a routerLink="/disease-and-treatments" routerLinkActive="active">Conditions and
-            Goals</a>
+          <li *ngIf="isAuthenticated"><a routerLink="/disease-and-treatments" routerLinkActive="active">Our users</a>
           </li>
           <li *ngIf="isAuthenticated"><a (click)="logout()">Logout</a></li>
         </ul>

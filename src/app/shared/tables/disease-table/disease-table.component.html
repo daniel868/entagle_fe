@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h2>Diseases and Treatments</h2>
+  <h2>Our users</h2>
 
 
   <div class="table-header-container">
@@ -39,7 +39,15 @@
               </span>
             <span class="ml-2">{{ disease.diseaseName }}</span>
 
+
             <div class="menu-container">
+
+              <button class="view-patient-info-btn"
+                      tooltip="View patient info">
+                <i class="bi bi-eye"></i> <!-- Bootstrap eye icon for "View Patient Info" -->
+              </button>
+
+
               <button class="menu-btn" (click)="toggleDropdownMenu(i)">
                 &#x22EE; <!-- Unicode character for vertical ellipsis (3 dots) -->
               </button>
@@ -48,7 +56,6 @@
                 <a class="dropdown-table-item" (click)="onAddNewTreatmentModal(disease.id)">Add new treatment</a>
                 <a class="dropdown-table-item" (click)="onDeleteDiseaseClick(disease.id)">Delete disease</a>
               </div>
-
             </div>
           </div>
         </td>
