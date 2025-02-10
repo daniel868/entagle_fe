@@ -43,7 +43,9 @@
             <div class="menu-container">
 
               <button class="view-patient-info-btn"
-                      tooltip="View patient info">
+                      tooltip="View patient info"
+                      (click)="onPatientInfoClick(disease.patientSituation)"
+              >
                 <i class="bi bi-eye"></i> <!-- Bootstrap eye icon for "View Patient Info" -->
               </button>
 

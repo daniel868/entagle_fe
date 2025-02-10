@@ -25,6 +25,7 @@ import {WarningModalComponent} from "../../modals/warning-modal/warning-modal.co
 import {FormsModule} from "@angular/forms";
 import {document} from "ngx-bootstrap/utils";
 import {TooltipModule} from "ngx-bootstrap/tooltip";
+import {PatientSituationModalComponent} from "../../modals/patient-situation-modal/patient-situation-modal.component";
 
 @Component({
   selector: 'app-disease-table',
@@ -112,7 +113,6 @@ export class DiseaseTableComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
 
   }
-
 
 
   toggleRow(index: number): void {
@@ -230,5 +230,19 @@ export class DiseaseTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onSearchStringChange(newValue: string) {
     this.searchStringEventEmitter.emit(newValue);
+  }
+
+  onPatientInfoClick(patientSituation: string) {
+    if (patientSituation !== null) {
+      const initialState = {
+        patientSituation: patientSituation
+      };
+      const modalOptions: ModalOptions = {
+        initialState: initialState,
+        backdrop: true,  // Enables backdrop click to close the modal
+        keyboard: true,  // Close the modal when pressing escape
+      };
+      this.bsModalService.show(PatientSituationModalComponent, modalOptions)
+    }
   }
 }
