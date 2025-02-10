@@ -5,7 +5,7 @@ import {
   AddNewDiseaseAction,
   AddNewTreatmentAction,
   DeleteDiseaseAction, FetchTreatmentItemAction,
-  FetchUserDiseaseAction, TreatmentItemAction,
+  FetchUserDiseaseAction, InitializeNewContactRequest, TreatmentItemAction,
   UserDiseaseAction
 } from "./medical.action";
 import {catchError, exhaustMap, map, of, switchMap} from "rxjs";
@@ -116,6 +116,31 @@ export class MedicalEffects {
               return TreatmentItemAction({items: response})
             })
           )
+      })
+    )
+  )
+
+  addNewContactEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InitializeNewContactRequest),
+      switchMap((actionProps) => {
+        return this.httpClient.post<GenericSuccessResponse<boolean>>(`${environment.baseUrL}/patient/contact`,
+          {
+            "patientSituation": actionProps.patientSituation,
+            "patientContactInfo": actionProps.patientContactInfo
+          }).pipe(
+          exhaustMap(response => {
+              let action = response.payload ?
+                GenericSuccessAction({message: "Your request has been registered. You will soon contacted."}) :
+                GenericFailedAction({message: "A problem occurred. Please try again later."});
+              return [
+                action
+              ]
+          }),
+          catchError(error=>{
+            return of(GenericFailedAction({message: "A problem occurred. Please try again later."}));
+          })
+        )
       })
     )
   )

@@ -34,3 +34,8 @@ export const FetchTreatmentItemAction = createAction('[Medical] Fetch Treatment 
 export const TreatmentItemAction = createAction('[Medical] Treatment Item', props<{
   items: GenericSuccessResponse<TreatmentItem[]>
 }>())
+
+export const InitializeNewContactRequest = createAction('[Medical] Initialize New Contact Request', props<{
+  patientSituation: string,
+  patientContactInfo: string
+}>())

@@ -1,0 +1,43 @@
+.modal-header {
+  border-bottom: 1px solid #ffcc00; /* Light yellow border */
+  background-color: #ffc107; /* Warning yellow background */
+}
+
+.modal-body {
+  padding: 20px;
+  color: #856404; /* Darker yellow-orange text */
+  background-color: #fff3cd; /* Light yellow background */
+}
+
+.modal-footer {
+  border-top: 1px solid #ffcc00; /* Light yellow border */
+  justify-content: center;
+}
+
+.modal-footer .btn {
+  padding: 8px 24px;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important; /* Warning yellow */
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.modal-footer .btn-warning {
+  background-color: #ffc107; /* Warning yellow */
+  border-color: #ffc107;
+}
+
+.modal-footer .btn-warning:hover {
+  background-color: #e0a800; /* Darker yellow for hover */
+  border-color: #d39e00;
+}
+
+.icon-warning {
+  font-size: 30px;
+  color: #856404; /* Dark yellow-orange for the icon */
+  margin-right: 10px;
+}

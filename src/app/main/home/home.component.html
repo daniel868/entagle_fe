@@ -1,6 +1,6 @@
 <div class="contact-form-container">
   <h2>Intake form</h2>
-  <form>
+  <form [formGroup]="intakeForm" (ngSubmit)="submitPatientSituation()">
     <!-- Current Situation Textarea -->
     <div class="form-group">
       <label for="currentSituation">Current Situation</label>
@@ -10,9 +10,6 @@
                 placeholder="Place type down things that you consider relevant in your healing process (symptoms, sensations etc)"
                 class="form-control">
       </textarea>
-<!--      <div *ngIf="contactForm.get('currentSituation')?.invalid && contactForm.get('currentSituation')?.touched" class="error">-->
-<!--        Please describe your current situation.-->
-<!--      </div>-->
     </div>
 
     <!-- Email or Phone Input -->
@@ -22,13 +19,12 @@
              id="contactInfo"
              type="text"
              placeholder="Enter your email or phone number"
-             class="form-control" />
-<!--      <div *ngIf="contactForm.get('contactInfo')?.invalid && contactForm.get('contactInfo')?.touched" class="error">-->
-<!--        Please provide a valid email or phone number.-->
-<!--      </div>-->
+             class="form-control"/>
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" class="submit-btn" >Submit</button>
+    <button type="submit"
+            class="submit-btn"
+            [disabled]="!intakeForm.valid">Submit</button>
   </form>
 </div>
