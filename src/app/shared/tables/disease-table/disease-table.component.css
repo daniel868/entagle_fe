@@ -58,6 +58,11 @@
 /* Expanded row background */
 .expanded-row td {
   background-color: transparent;
+  cursor: pointer;
+}
+
+.expanded-row td:hover {
+  background-color: #f0f0f0; /* Change this to your desired hover color */
 }
 
 .search-input {

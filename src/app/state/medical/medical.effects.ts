@@ -127,17 +127,18 @@ export class MedicalEffects {
         return this.httpClient.post<GenericSuccessResponse<boolean>>(`${environment.baseUrL}/patient/contact`,
           {
             "patientSituation": actionProps.patientSituation,
-            "patientContactInfo": actionProps.patientContactInfo
+            "patientContactInfo": actionProps.patientContactInfo,
+            "patientName": actionProps.patientName
           }).pipe(
           exhaustMap(response => {
-              let action = response.payload ?
-                GenericSuccessAction({message: "Your request has been registered. You will soon contacted."}) :
-                GenericFailedAction({message: "A problem occurred. Please try again later."});
-              return [
-                action
-              ]
+            let action = response.payload ?
+              GenericSuccessAction({message: "Your request has been registered. You will be contacted soon by one of our specialists. "}) :
+              GenericFailedAction({message: "A problem occurred. Please try again later."});
+            return [
+              action
+            ]
           }),
-          catchError(error=>{
+          catchError(error => {
             return of(GenericFailedAction({message: "A problem occurred. Please try again later."}));
           })
         )

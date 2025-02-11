@@ -37,5 +37,6 @@ export const TreatmentItemAction = createAction('[Medical] Treatment Item', prop
 
 export const InitializeNewContactRequest = createAction('[Medical] Initialize New Contact Request', props<{
   patientSituation: string,
-  patientContactInfo: string
+  patientContactInfo: string,
+  patientName:string
 }>())

@@ -18,21 +18,23 @@ export class HomeComponent implements OnInit {
   intakeForm: FormGroup;
 
 
-  constructor(private store:Store<AppState>) {
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
     this.intakeForm = new FormGroup({
       currentSituation: new FormControl('', [Validators.required]),
-      contactInfo: new FormControl('', [Validators.required])
+      contactInfo: new FormControl('', [Validators.required]),
+      contactNameAndSurname: new FormControl('', [Validators.required])
     });
 
   }
 
-  submitPatientSituation(){
+  submitPatientSituation() {
     this.store.dispatch(InitializeNewContactRequest({
       patientSituation: this.intakeForm.get('currentSituation')?.value,
-      patientContactInfo: this.intakeForm.get('contactInfo')?.value
+      patientContactInfo: this.intakeForm.get('contactInfo')?.value,
+      patientName: this.intakeForm.get('contactNameAndSurname')?.value
     }))
   }
 
