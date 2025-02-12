@@ -1,6 +1,7 @@
 import {TreatmentItem} from "./treatment-item";
 
 export class Treatment {
+  public id: number;
   public category: string;
   public description: string;
   public specialistName: string;

@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h6 class="modal-title">Modify item category {{ editedItem.type }}</h6>
+  <button type="button" class="btn-close"
+          (click)="closeModal()">
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="editItemForm" (ngSubmit)="updateItem()">
+    <label for="itemDescription" class="mb-2 mt-2 h5">Recommendation:</label>
+    <input class="form-control"
+           placeholder="Recommendation"
+           type="text"
+           required
+           id="itemDescription"
+           formControlName="itemDescription">
+    <button class="btn btn-primary mt-3"
+            type="submit">
+      Update description
+    </button>
+  </form>
+</div>

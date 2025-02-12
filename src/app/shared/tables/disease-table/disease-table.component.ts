@@ -26,6 +26,11 @@ import {FormsModule} from "@angular/forms";
 import {document} from "ngx-bootstrap/utils";
 import {TooltipModule} from "ngx-bootstrap/tooltip";
 import {PatientSituationModalComponent} from "../../modals/patient-situation-modal/patient-situation-modal.component";
+import {TreatmentItem} from "../../../model/treatment-item";
+import {GenericSuccessModalComponent} from "../../modals/generic-success-modal/generic-success-modal.component";
+import {
+  EditTreatmentItemModalComponent
+} from "../../modals/edit-treatment-item-modal/edit-treatment-item-modal.component";
 
 @Component({
   selector: 'app-disease-table',
@@ -244,5 +249,20 @@ export class DiseaseTableComponent implements OnInit, OnDestroy, AfterViewInit {
       };
       this.bsModalService.show(PatientSituationModalComponent, modalOptions)
     }
+  }
+
+  onTreatmentItemClicked(id: number, editedItem: TreatmentItem, items: TreatmentItem[]) {
+    const initialState = {
+      editedItem: editedItem,
+      items: items,
+      treatmentId: id
+    };
+    const modalOptions: ModalOptions = {
+      initialState: initialState,
+      backdrop: true,  // Enables backdrop click to close the modal
+      keyboard: true,  // Close the modal when pressing escape
+    };
+
+    this.bsModalService.show(EditTreatmentItemModalComponent, modalOptions);
   }
 }

@@ -4,8 +4,12 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {
   AddNewDiseaseAction,
   AddNewTreatmentAction,
-  DeleteDiseaseAction, FetchTreatmentItemAction,
-  FetchUserDiseaseAction, InitializeNewContactRequest, TreatmentItemAction,
+  DeleteDiseaseAction,
+  FetchTreatmentItemAction,
+  FetchUserDiseaseAction,
+  InitializeNewContactRequest,
+  TreatmentItemAction,
+  UpdateTreatmentItemAction,
   UserDiseaseAction
 } from "./medical.action";
 import {catchError, exhaustMap, map, of, switchMap} from "rxjs";
@@ -15,6 +19,7 @@ import {environment} from "../../../environments/environment";
 import {GenericSuccessResponse} from "../../shared/generic/generic-success-response";
 import {GenericFailedAction, GenericSuccessAction} from "../shared/shared.actions";
 import {TreatmentItem} from "../../model/treatment-item";
+import {props} from "@ngrx/store";
 
 @Injectable()
 export class MedicalEffects {
@@ -142,6 +147,27 @@ export class MedicalEffects {
             return of(GenericFailedAction({message: "A problem occurred. Please try again later."}));
           })
         )
+      })
+    )
+  )
+
+  updateTreatmentItemEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UpdateTreatmentItemAction),
+      switchMap((actionsProps) => {
+        return this.httpClient.put<GenericSuccessResponse<boolean>>(`${environment.baseUrL}/medical/modifyTreatment/${actionsProps.treatmentId}`, actionsProps.items)
+          .pipe(
+            exhaustMap(response => {
+              let action = response.payload ?
+                GenericSuccessAction({message: "Success updated item"}) :
+                GenericFailedAction({message: "A problem occurred. Please try again later."});
+              return [
+                action,
+                FetchUserDiseaseAction({pagination: {page: 1, size: 10}, searchString: ''})
+              ]
+            }),
+            catchError(err => of(GenericFailedAction({message: "A problem occurred. Please try again later."})))
+          )
       })
     )
   )

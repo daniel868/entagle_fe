@@ -79,7 +79,8 @@
               <td class="floating-list-item">
                 {{ treatment.specialistName }}
               </td>
-              <td class="floating-list-item" *ngFor="let item of treatment.items">
+              <td class="floating-list-item" *ngFor="let item of treatment.items"
+                  (click)="onTreatmentItemClicked(treatment.id, item,treatment.items)">
                 {{ item.description ? item.description : '' }}
               </td>
             </tr>
