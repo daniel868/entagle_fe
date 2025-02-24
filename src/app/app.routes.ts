@@ -9,6 +9,8 @@ import {ResetPasswordStep1Component} from "./auth/reset-password/reset-password-
 import {ResetPasswordStep2Component} from "./auth/reset-password/reset-password-step-2/reset-password-step-2.component";
 import {DiseaseTableComponent} from "./shared/tables/disease-table/disease-table.component";
 import {HomeComponent} from "./main/home/home.component";
+import {LandingComponent} from "./main/landing/landing/landing.component";
+import {TempMainComponent} from "./main/temp-main/temp-main.component";
 
 export const routes: Routes = [
   {
@@ -17,19 +19,26 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'main',
-    canActivate: [AuthGuard],
-    component: MainComponent
+    path: 'app',
+    component: TempMainComponent,
+    children: [
+      {
+        path: 'auth',
+        component: AuthComponent
+      },
+      {
+        path: 'main',
+        canActivate: [AuthGuard],
+        component: MainComponent
+      },
+      {
+        path: 'disease-and-treatments',
+        canActivate: [AuthGuard],
+        component: DiseaseTableComponent
+      },
+    ]
   },
-  {
-    path: 'disease-and-treatments',
-    canActivate: [AuthGuard],
-    component: DiseaseTableComponent
-  },
-  {
-    path: 'auth',
-    component: AuthComponent
-  },
+
   {
     path: 'email-validation',
     canActivate: [EmailValidationGuard],
@@ -45,6 +54,6 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: LandingComponent
   }
 ];

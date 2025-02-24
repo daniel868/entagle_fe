@@ -133,7 +133,7 @@ export class AuthEffects {
         ofType(LoginFinishAction),
         tap((action) => {
           if (action.accountActivate) {
-            this.router.navigate(['/main'])
+            this.router.navigate(['/app/main'])
           } else {
             this.router.navigate(['/email-validation']
             )
@@ -182,7 +182,7 @@ export class AuthEffects {
       tap((action) => {
         this.authService.clearTimeout();
         localStorage.removeItem('userData');
-        this.router.navigate(['/auth'])
+        this.router.navigate(['/app/auth'])
       })
     ), {dispatch: false})
 

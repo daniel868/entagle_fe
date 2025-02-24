@@ -1,0 +1,8 @@
+:host {
+  display: contents;
+}
+.nav-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}

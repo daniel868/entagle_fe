@@ -3,12 +3,14 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {AppState} from "../../state/app.reducer";
 import {Store} from "@ngrx/store";
 import {InitializeNewContactRequest} from "../../state/medical/medical.action";
+import {HeroSectionsComponent} from "../landing/hero-sections/hero-sections.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HeroSectionsComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

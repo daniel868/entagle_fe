@@ -1,0 +1,108 @@
+.contact {
+  background-color: rgb(87, 147, 94);
+}
+
+.contact-hero {
+  position: relative;
+  min-height: 384px;
+  padding: 93px 80px 59px;
+  overflow: hidden;
+}
+
+.contact-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-header {
+  position: relative;
+  z-index: 1;
+}
+
+.brand-name {
+  color: rgb(250, 239, 224);
+  font-size: 57px;
+  line-height: 1;
+  letter-spacing: -1.25px;
+  font-weight: 700;
+}
+
+.contact-title {
+  color: rgb(250, 239, 224);
+  font-size: 50px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  font-weight: 700;
+  margin-top: 142px;
+}
+
+.contact-info {
+  padding-bottom: 77px;
+}
+
+.contact-grid {
+  max-width: 908px;
+  margin: 135px auto 0;
+  display: grid;
+  grid-template-columns: 37% 48% 15%;
+  gap: 20px;
+}
+
+.info-title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.56px;
+  color: rgb(40, 42, 41);
+}
+
+.hours-list,
+.email,
+.address {
+  font-size: 19px;
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  line-height: 26px;
+  color: rgb(40, 42, 41);
+  margin-top: 28px;
+}
+
+.contact-column {
+  margin-top: 100px;
+}
+
+.address {
+  margin-top: 74px;
+}
+
+@media (max-width: 991px) {
+  .contact-hero {
+    padding: 40px 20px;
+  }
+
+  .brand-name {
+    font-size: 40px;
+  }
+
+  .contact-title {
+    font-size: 40px;
+    margin-top: 40px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+
+  .contact-column {
+    margin-top: 40px;
+  }
+
+  .address {
+    margin-top: 40px;
+  }
+}

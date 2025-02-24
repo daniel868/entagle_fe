@@ -1,0 +1,33 @@
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: "Libre Baskerville", serif;
+  color: rgb(40, 42, 41);
+}
+
+.testimonial-icon {
+  width: 58px;
+  aspect-ratio: 1.29;
+  object-fit: contain;
+}
+
+.testimonial-content {
+  font-size: 19px;
+  line-height: 26px;
+  font-weight: 400;
+  margin-top: 22px;
+}
+
+.testimonial-author {
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 700;
+  margin-top: 36px;
+}
+
+@media (max-width: 991px) {
+  .testimonial-card {
+    margin-top: 40px;
+  }
+}

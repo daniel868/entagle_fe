@@ -1,0 +1,79 @@
+.mission {
+  background-color: rgb(250, 239, 224);
+  padding: 0 70px;
+}
+
+.mission-container {
+  max-width: 1275px;
+  margin: 0 auto;
+  padding: 58px 0;
+}
+
+.mission-content {
+  display: flex;
+  gap: 20px;
+}
+
+.mission-image {
+  width: 50%;
+  aspect-ratio: 0.81;
+  object-fit: contain;
+}
+
+.mission-text {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mission-title {
+  font-size: 51px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  font-weight: 700;
+  color: rgb(40, 42, 41);
+}
+
+.mission-subtitle {
+  font-size: 28px;
+  line-height: 1;
+  margin-top: 48px;
+  font-weight: 400;
+  font-family: "Libre Baskerville", serif;
+}
+
+.mission-description {
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: -0.4px;
+  margin-top: 50px;
+  font-family: "Libre Baskerville", serif;
+}
+
+@media (max-width: 991px) {
+  .mission {
+    padding: 0 20px;
+  }
+
+  .mission-content {
+    flex-direction: column;
+  }
+
+  .mission-image,
+  .mission-text {
+    width: 100%;
+  }
+
+  .mission-text {
+    margin-top: 40px;
+  }
+
+  .mission-title {
+    font-size: 40px;
+  }
+
+  .mission-subtitle {
+    margin-top: 40px;
+  }
+}

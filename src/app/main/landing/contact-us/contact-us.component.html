@@ -1,0 +1,36 @@
+<section class="contact">
+  <div class="contact-hero">
+    <img
+      src="https://cdn.builder.io/api/v1/image/assets/0b37981e5c3840ba983029b159f4d193/0ebc7d00e4af821f041a6340c8c88940547572bf2e6c3187f589b5c126f8c2a0?placeholderIfAbsent=true"
+      alt=""
+      class="contact-bg"
+    />
+    <div class="contact-header">
+      <h2 class="brand-name">Entangle</h2>
+      <h3 class="contact-title">Contact Us</h3>
+    </div>
+  </div>
+  <div class="contact-info">
+    <div class="contact-grid">
+      <div class="hours-column">
+        <h4 class="info-title">Clinic Hours</h4>
+        <p class="hours-list">
+              <span *ngFor="let hour of contactInfo.hours"
+              >{{ hour }}<br
+              /></span>
+        </p>
+      </div>
+      <div class="contact-column">
+        <h4 class="info-title">Phone:</h4>
+        <p class="email">{{ contactInfo.email }}</p>
+      </div>
+      <div class="address-column">
+        <p class="address">
+              <span *ngFor="let line of contactInfo.address"
+              >{{ line }}<br
+              /></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

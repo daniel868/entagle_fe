@@ -1,0 +1,55 @@
+:host {
+  display: contents;
+}
+
+.nav {
+  background-color: rgba(250, 239, 224, 1);
+  display: flex;
+  padding-left: 70px;
+  padding-right: 70px;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: "Libre Baskerville",
+  -apple-system,
+  Roboto,
+  Helvetica,
+  sans-serif;
+  font-size: 15px;
+  color: rgba(48, 66, 84, 1);
+  font-weight: 700;
+}
+
+@media (max-width: 991px) {
+  .nav {
+    padding-left: 20px;
+  }
+}
+
+.nav-list {
+  background-color: rgba(250, 239, 224, 1);
+  display: flex;
+  padding: 14px 56px;
+  align-items: stretch;
+  gap: 32px;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .nav-list {
+    padding: 14px 20px;
+  }
+}
+
+:host ::ng-deep .specializations {
+  flex-basis: auto;
+}
+
+:host ::ng-deep .testimonials {
+  flex-basis: auto;
+}
+
+:host ::ng-deep .contact {
+  align-self: flex-start;
+}

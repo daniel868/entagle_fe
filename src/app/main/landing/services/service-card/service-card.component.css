@@ -1,0 +1,56 @@
+.service-card {
+  display: flex;
+  flex-direction: column;
+  padding: 31px 25px;
+  font-family: Inter, sans-serif;
+  color: rgb(40, 42, 41);
+  background: #1e7e34;
+}
+
+.service-icon {
+  width: 100%;
+  object-fit: contain;
+}
+
+.service-title {
+  font-size: 26px;
+  line-height: 33px;
+  letter-spacing: -0.56px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.service-description {
+  font-size: 19px;
+  line-height: 28px;
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  margin-top: 20px;
+}
+
+.learn-more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 22px 70px;
+  font-size: 17px;
+  line-height: 2;
+  font-weight: 700;
+  background: rgb(250, 239, 224);;
+  border: none;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+@media (max-width: 991px) {
+  .service-card {
+    padding: 20px;
+    margin-top: 19px;
+  }
+
+  .learn-more {
+    margin-top: 40px;
+    padding: 20px;
+  }
+}
