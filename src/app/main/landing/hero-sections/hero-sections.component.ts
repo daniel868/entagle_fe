@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-hero-sections',
@@ -9,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class HeroSectionsComponent {
 
+  constructor(private router: Router) {
+  }
+
+  onBookClick() {
+    this.router.navigate(['/book-consult'])
+  }
 }

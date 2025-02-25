@@ -11,6 +11,7 @@ import {DiseaseTableComponent} from "./shared/tables/disease-table/disease-table
 import {HomeComponent} from "./main/home/home.component";
 import {LandingComponent} from "./main/landing/landing/landing.component";
 import {TempMainComponent} from "./main/temp-main/temp-main.component";
+import {IntakeComponent} from "./main/intake/intake.component";
 
 export const routes: Routes = [
   {
@@ -38,7 +39,10 @@ export const routes: Routes = [
       },
     ]
   },
-
+  {
+    path: 'book-consult',
+    component: IntakeComponent
+  },
   {
     path: 'email-validation',
     canActivate: [EmailValidationGuard],

@@ -1,0 +1,41 @@
+<div class="contact-form-container">
+  <h2>Intake form</h2>
+  <form [formGroup]="intakeForm" (ngSubmit)="submitPatientSituation()">
+
+    <div class="form-group">
+      <label for="contactNameAndSurname">Name and Surname</label>
+      <input formControlName="contactNameAndSurname"
+             id="contactNameAndSurname"
+             type="text"
+             placeholder="Enter your name and surname"
+             class="form-control">
+    </div>
+
+    <!-- Current Situation Textarea -->
+    <div class="form-group">
+      <label for="currentSituation">Current Situation</label>
+      <textarea formControlName="currentSituation"
+                id="currentSituation"
+                rows="5"
+                placeholder="Place type down things that you consider relevant in your healing process (symptoms, sensations etc)"
+                class="form-control">
+      </textarea>
+    </div>
+
+    <!-- Email or Phone Input -->
+    <div class="form-group">
+      <label for="contactInfo">Email or Phone Number</label>
+      <input formControlName="contactInfo"
+             id="contactInfo"
+             type="text"
+             placeholder="Enter your email or phone number"
+             class="form-control"/>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit"
+            class="submit-btn"
+            [disabled]="!intakeForm.valid">Submit
+    </button>
+  </form>
+</div>

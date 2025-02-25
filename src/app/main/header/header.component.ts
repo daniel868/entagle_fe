@@ -23,7 +23,7 @@ export class HeaderComponent {
       className: "specializations",
     },
     {label: "Services", route: "services"},
-    {label: "Testimonials", route: "testimonials", className: "testimonials"},
+    // {label: "Testimonials", route: "testimonials", className: "testimonials"},
     {label: "Contact", route: "contact", className: "contact"},
     {label: "I'm a wellbeing specialist", route: "/app/auth"}
   ]
