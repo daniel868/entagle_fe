@@ -3,7 +3,7 @@ import {AppState} from "../state/app.reducer";
 import {Store} from "@ngrx/store";
 import {Subscription, tap} from "rxjs";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {FetchUserInfoAction} from "../state/userInfo/userInfo.actions";
+import {FetchUserInfoAction, UploadProfilePictureAction} from "../state/userInfo/userInfo.actions";
 import {NgForOf} from "@angular/common";
 import {ChangeUsernameModalComponent} from "../shared/modals/change-username-modal/change-username-modal.component";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
@@ -33,6 +33,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   currentModal: BsModalRef;
 
+  imageBase64: string = 'no_profile_image.png';
 
   @ViewChild('changeUsernameTemplate')
   changeUsernameTemplate: TemplateRef<any>;
@@ -89,5 +90,12 @@ export class MainComponent implements OnInit, OnDestroy {
 
   openPasswordModal() {
     this.currentModal = this.modalService.show(ChangePasswordModalComponent);
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0] as File;
+    if (file){
+      this.store.dispatch(UploadProfilePictureAction({profileImageFile:file}))
+    }
   }
 }

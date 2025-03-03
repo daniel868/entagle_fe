@@ -17,5 +17,9 @@ export const ChangePasswordAction = createAction('[UserInfo] Change Password', p
 }>());
 
 export const ChangeEmailAction = createAction('[UserInfo] Change Email', props<{
-  newEmail:string
+  newEmail: string
 }>());
+
+export const UploadProfilePictureAction = createAction('[UserInfo] Upload Profile Picture', props<{
+  profileImageFile: File
+}>())

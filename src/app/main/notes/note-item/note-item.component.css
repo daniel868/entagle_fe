@@ -1,0 +1,32 @@
+.note-container {
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 4px;
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.note-date {
+  font-size: 12px;
+  color: #666;
+}
+
+.delete-button {
+  color: #666;
+  transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.delete-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.note-text {
+  font-size: 14px;
+  color: #282a29;
+}

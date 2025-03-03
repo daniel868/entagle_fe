@@ -5,7 +5,7 @@ import {
   ChangeEmailAction,
   ChangePasswordAction,
   ChangeUsernameAction,
-  FetchUserInfoAction,
+  FetchUserInfoAction, UploadProfilePictureAction,
   UserInfoActionFinished
 } from "./userInfo.actions";
 import {catchError, exhaustMap, map, of, switchMap} from "rxjs";
@@ -98,4 +98,33 @@ export class UserInfoEffects {
         )
       })
     ))
+
+
+  uploadProfilePictureEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UploadProfilePictureAction),
+      switchMap(actionProps => {
+        let formData = new FormData()
+        formData.append('file', actionProps.profileImageFile)
+        return this.httpClient.post<GenericSuccessResponse<Map<String, Object>>>(`${environment.baseUrL}/userInfo/profilePicture`, formData,
+          {
+            headers: {'Content-Type': 'multipart/form-data; boundary=--------------------------'}
+          }
+        ).pipe(
+          exhaustMap(response => {
+            let successAction = response ?
+              GenericSuccessAction({message: "Success upload profile image"}) :
+              GenericFailedAction({message: "Error occurred while uploading image"})
+            return [
+              successAction
+              //TODO: dispatch action to fetch the new image and set into store
+            ]
+          }),
+          catchError((error) => {
+            return of(GenericFailedAction({message: "Error occurred while uploading image"}));
+          })
+        )
+      })
+    )
+  )
 }

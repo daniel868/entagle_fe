@@ -89,3 +89,25 @@
 .btn-primary:hover {
   background-color: #0056b3;  /* Darker color on hover */
 }
+
+
+.box {
+  transition: box-shadow 0.3s ease;
+}
+
+.box:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add hover effect */
+}
+
+.image-preview {
+  min-height: 250px; /* Ensure the preview area has a minimum height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+}

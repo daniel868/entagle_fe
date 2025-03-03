@@ -6,6 +6,7 @@ import {ServiceSectionComponent} from "../services/service-section/service-secti
 import {SpecializationComponent} from "../specialization/specialization.component";
 import {TestimonialSectionComponent} from "../testimonial/testimonial-section/testimonial-section.component";
 import {HeaderComponent} from "../../header/header.component";
+import {MedicalNoteComponent} from "../../notes/medical-note/medical-note.component";
 
 @Component({
   selector: 'app-landing',
@@ -17,7 +18,8 @@ import {HeaderComponent} from "../../header/header.component";
     ServiceSectionComponent,
     SpecializationComponent,
     TestimonialSectionComponent,
-    HeaderComponent
+    HeaderComponent,
+    MedicalNoteComponent
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
