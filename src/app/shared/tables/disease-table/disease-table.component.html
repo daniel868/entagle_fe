@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" (click)="onAddDisease()">Add recommendation</button>
+    <button type="button" class="btn btn-primary" (click)="onAddDisease()">Add user</button>
   </div>
 
   <table class="table table-borderless">
@@ -55,7 +55,7 @@
               </button>
 
               <div class="dropdown-table-menu" *ngIf="isDropdownMenuOpen(i)" id="dropdownItemRows" #dropdownItemRows>
-                <a class="dropdown-table-item" (click)="onAddNewTreatmentModal(disease.id)">Add new treatment</a>
+                <a class="dropdown-table-item" (click)="onAddNewTreatmentModal(disease.id)">Add recommendation</a>
                 <a class="dropdown-table-item" (click)="onDeleteDiseaseClick(disease.id)">Delete user</a>
               </div>
             </div>

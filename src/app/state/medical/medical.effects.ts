@@ -78,7 +78,7 @@ export class MedicalEffects {
         ).pipe(
           exhaustMap((response) => {
             return [
-              GenericSuccessAction({message: "Success saved disease"}),
+              GenericSuccessAction({message: "User successfully saved"}),
               FetchUserDiseaseAction({pagination: {page: 1, size: 10}, searchString: ''})
             ]
           }),
