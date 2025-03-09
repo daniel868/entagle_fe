@@ -1,14 +1,16 @@
 import {createReducer, on} from "@ngrx/store";
-import {UserInfoActionFinished} from "./userInfo.actions";
+import {StoreProfilePictureAction, UserInfoActionFinished} from "./userInfo.actions";
 
 export interface UserInfoState {
   qualification: string[] | null
   competences: string[] | null
+  profileImage: string | null
 }
 
 const initialState: UserInfoState = {
   qualification: null,
-  competences: null
+  competences: null,
+  profileImage: null
 }
 
 export const userInfoReducer = createReducer(
@@ -18,6 +20,12 @@ export const userInfoReducer = createReducer(
       ...state,
       qualification: qualification,
       competences: competences
+    }
+  }),
+  on(StoreProfilePictureAction, (state, {imageBase64Content}) => {
+    return {
+      ...state,
+      profileImage: imageBase64Content
     }
   })
 )

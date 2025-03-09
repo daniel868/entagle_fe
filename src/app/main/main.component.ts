@@ -3,7 +3,11 @@ import {AppState} from "../state/app.reducer";
 import {Store} from "@ngrx/store";
 import {Subscription, tap} from "rxjs";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {FetchUserInfoAction, UploadProfilePictureAction} from "../state/userInfo/userInfo.actions";
+import {
+  FetchProfilePictureAction,
+  FetchUserInfoAction,
+  UploadProfilePictureAction
+} from "../state/userInfo/userInfo.actions";
 import {NgForOf} from "@angular/common";
 import {ChangeUsernameModalComponent} from "../shared/modals/change-username-modal/change-username-modal.component";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
@@ -44,6 +48,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(FetchUserInfoAction());
+    this.store.dispatch(FetchProfilePictureAction());
 
     this.userSubscription = this.store.select('auth')
       .subscribe(response => {
@@ -65,6 +70,14 @@ export class MainComponent implements OnInit, OnDestroy {
           this.qualification = userInfo.qualification;
         }
       });
+
+    this.store.select('userInfo')
+      .pipe()
+      .subscribe(response => {
+        if (!!response.profileImage) {
+          this.imageBase64 = "data:image/jpeg;base64," + response.profileImage
+        }
+      })
   }
 
   ngOnDestroy(): void {
@@ -94,8 +107,8 @@ export class MainComponent implements OnInit, OnDestroy {
 
   onFileSelected(event: any) {
     const file = event.target.files[0] as File;
-    if (file){
-      this.store.dispatch(UploadProfilePictureAction({profileImageFile:file}))
+    if (file) {
+      this.store.dispatch(UploadProfilePictureAction({profileImageFile: file}))
     }
   }
 }

@@ -5,14 +5,17 @@ import {
   ChangeEmailAction,
   ChangePasswordAction,
   ChangeUsernameAction,
-  FetchUserInfoAction, UploadProfilePictureAction,
+  FetchProfilePictureAction,
+  FetchUserInfoAction,
+  StoreProfilePictureAction,
+  UploadProfilePictureAction,
   UserInfoActionFinished
 } from "./userInfo.actions";
 import {catchError, exhaustMap, map, of, switchMap} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {GenericSuccessResponse} from "../../shared/generic/generic-success-response";
 import {GenericFailedAction, GenericSuccessAction} from "../shared/shared.actions";
-import {LoginFinishAction, LogoutAction} from "../auth/auth.actions";
+import {LogoutAction} from "../auth/auth.actions";
 
 @Injectable()
 export class UserInfoEffects {
@@ -106,22 +109,36 @@ export class UserInfoEffects {
       switchMap(actionProps => {
         let formData = new FormData()
         formData.append('file', actionProps.profileImageFile)
-        return this.httpClient.post<GenericSuccessResponse<Map<String, Object>>>(`${environment.baseUrL}/userInfo/profilePicture`, formData,
-          {
-            headers: {'Content-Type': 'multipart/form-data; boundary=--------------------------'}
-          }
-        ).pipe(
+        return this.httpClient.post<GenericSuccessResponse<Map<String, Object>>>(`${environment.baseUrL}/userInfo/uploadProfilePicture`, formData).pipe(
           exhaustMap(response => {
-            let successAction = response ?
+            let successAction = response.payload ?
               GenericSuccessAction({message: "Success upload profile image"}) :
               GenericFailedAction({message: "Error occurred while uploading image"})
             return [
-              successAction
-              //TODO: dispatch action to fetch the new image and set into store
+              successAction,
+              FetchProfilePictureAction()
             ]
           }),
           catchError((error) => {
             return of(GenericFailedAction({message: "Error occurred while uploading image"}));
+          })
+        )
+      })
+    )
+  )
+
+  fetchProfilePictureEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FetchProfilePictureAction),
+      switchMap(() => {
+        return this.httpClient.get<GenericSuccessResponse<string>>(`${environment.baseUrL}/userInfo/profilePicture`).pipe(
+          map(response => {
+            return response !== null ?
+              StoreProfilePictureAction({imageBase64Content: response.payload}) :
+              GenericFailedAction({message: "Error occurred while fetching profile image"})
+          }),
+          catchError(error => {
+            return of(GenericFailedAction({message: "Error occurred while fetching profile image"}))
           })
         )
       })

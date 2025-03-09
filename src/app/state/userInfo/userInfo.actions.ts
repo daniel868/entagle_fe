@@ -23,3 +23,9 @@ export const ChangeEmailAction = createAction('[UserInfo] Change Email', props<{
 export const UploadProfilePictureAction = createAction('[UserInfo] Upload Profile Picture', props<{
   profileImageFile: File
 }>())
+
+export const FetchProfilePictureAction = createAction('[UserInfo] Fetch Profile Picture');
+
+export const StoreProfilePictureAction = createAction('[UserInfo] Store Profile Picture', props<{
+  imageBase64Content: string
+}>())
