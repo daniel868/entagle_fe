@@ -31,6 +31,8 @@ import {GenericSuccessModalComponent} from "../../modals/generic-success-modal/g
 import {
   EditTreatmentItemModalComponent
 } from "../../modals/edit-treatment-item-modal/edit-treatment-item-modal.component";
+import {Patient} from "../../../model/patient";
+import {PatientContactModalComponent} from "../../modals/patient-contact-modal/patient-contact-modal.component";
 
 @Component({
   selector: 'app-disease-table',
@@ -264,5 +266,21 @@ export class DiseaseTableComponent implements OnInit, OnDestroy, AfterViewInit {
     };
 
     this.bsModalService.show(EditTreatmentItemModalComponent, modalOptions);
+  }
+
+  viewContactInfo(patient: Patient) {
+    if (patient !== null) {
+      const initialState = {
+        patient: patient
+      };
+      const modalOptions: ModalOptions = {
+        initialState: initialState,
+        backdrop: true,  // Enables backdrop click to close the modal
+        keyboard: true,  // Close the modal when pressing escape
+      };
+
+      this.bsModalService.show(PatientContactModalComponent, modalOptions);
+    }
+
   }
 }

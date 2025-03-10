@@ -56,6 +56,7 @@
 
               <div class="dropdown-table-menu" *ngIf="isDropdownMenuOpen(i)" id="dropdownItemRows" #dropdownItemRows>
                 <a class="dropdown-table-item" (click)="onAddNewTreatmentModal(disease.id)">Add recommendation</a>
+                <a class="dropdown-table-item" (click)="viewContactInfo(disease.patientInfo)">Contact Info</a>
                 <a class="dropdown-table-item" (click)="onDeleteDiseaseClick(disease.id)">Delete user</a>
               </div>
             </div>

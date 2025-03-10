@@ -1,0 +1,25 @@
+<div class="modal-header bg-patient text-white">
+  <h5 class="modal-title">
+    <i class="bi bi-check-circle-fill me-2"></i>
+    Patient Contact
+  </h5>
+  <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="closeModal()"></button>
+</div>
+
+<div class="modal-body">
+  <div class="field-container">
+    <span class="icon">
+      <i class="bi bi-person"></i> <!-- Bootstrap person icon -->
+    </span>
+    <span class="field-value">{{ patient.patientName }}</span>
+  </div>
+
+  <!-- Patient Contact Field -->
+  <div class="field-container">
+    <span class="icon">
+      <i class="bi bi-telephone"></i> <!-- Bootstrap telephone icon -->
+    </span>
+    <span class="field-value">{{ patient.patientContactInfo }}</span>
+  </div>
+</div>
+
