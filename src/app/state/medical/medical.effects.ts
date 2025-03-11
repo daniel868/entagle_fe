@@ -2,12 +2,12 @@ import {inject, Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {
-  AddNewDiseaseAction,
+  AddNewDiseaseAction, AddNewMedicalNoteAction,
   AddNewTreatmentAction,
-  DeleteDiseaseAction,
+  DeleteDiseaseAction, FetchMedicalNotesAction,
   FetchTreatmentItemAction,
   FetchUserDiseaseAction,
-  InitializeNewContactRequest,
+  InitializeNewContactRequest, StoreMedicalNotesAction,
   TreatmentItemAction,
   UpdateTreatmentItemAction,
   UserDiseaseAction
@@ -20,6 +20,7 @@ import {GenericSuccessResponse} from "../../shared/generic/generic-success-respo
 import {GenericFailedAction, GenericSuccessAction} from "../shared/shared.actions";
 import {TreatmentItem} from "../../model/treatment-item";
 import {props} from "@ngrx/store";
+import {MedicalNote} from "../../model/notes";
 
 @Injectable()
 export class MedicalEffects {
@@ -171,4 +172,36 @@ export class MedicalEffects {
       })
     )
   )
+
+  addNewNoteEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AddNewMedicalNoteAction),
+      switchMap(actionProps => {
+        return this.httpClient.post<GenericSuccessResponse<MedicalNote>>(`${environment.baseUrL}/medical/medical-note/${actionProps.diseaseId}`,
+          actionProps.note
+        ).pipe(
+          exhaustMap(response => {
+            return [
+              GenericSuccessAction({message: "Success saved note"}),
+              FetchMedicalNotesAction({diseaseId: actionProps.diseaseId})
+            ]
+          }),
+          catchError(err => of(GenericFailedAction({message: "A problem occurred. Please try again later."})))
+        )
+      })
+    )
+  )
+
+  fetchMedicalNotes = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FetchMedicalNotesAction),
+      switchMap(actionsProps => {
+        return this.httpClient.get<GenericSuccessResponse<MedicalNote[]>>(`${environment.baseUrL}/medical/medical-note/${actionsProps.diseaseId}`)
+          .pipe(
+            map(response => {
+              return StoreMedicalNotesAction({notes: response.payload})
+            }),
+            catchError(err => of(GenericFailedAction({message: "A problem occurred. Please try again later."}))))
+      })
+    ))
 }

@@ -33,6 +33,7 @@ import {
 } from "../../modals/edit-treatment-item-modal/edit-treatment-item-modal.component";
 import {Patient} from "../../../model/patient";
 import {PatientContactModalComponent} from "../../modals/patient-contact-modal/patient-contact-modal.component";
+import {MedicalNoteComponent} from "../../../main/notes/medical-note/medical-note.component";
 
 @Component({
   selector: 'app-disease-table',
@@ -46,7 +47,8 @@ import {PatientContactModalComponent} from "../../modals/patient-contact-modal/p
     MatInput,
     MatFormFieldModule,
     FormsModule,
-    TooltipModule
+    TooltipModule,
+    MedicalNoteComponent
   ],
   templateUrl: './disease-table.component.html',
   styleUrl: './disease-table.component.css'
@@ -85,6 +87,8 @@ export class DiseaseTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('dropdownItemRows', {static: false})
   dropDownItemRef: ElementRef;
+
+  openCloseNotesDrawer: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private store: Store<AppState>,
               private bsModalService: BsModalService) {
@@ -282,5 +286,9 @@ export class DiseaseTableComponent implements OnInit, OnDestroy, AfterViewInit {
       this.bsModalService.show(PatientContactModalComponent, modalOptions);
     }
 
+  }
+
+  onNoteViewerClick(id: number) {
+    this.openCloseNotesDrawer.emit(id);
   }
 }

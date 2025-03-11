@@ -1,5 +1,5 @@
 export interface MedicalNote {
-  id: number;
-  text: string;
-  date: string;
+  id: number | null;
+  noteContent: string;
+  createdDate: Date;
 }

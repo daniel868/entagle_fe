@@ -4,6 +4,7 @@ import {PageableGenericResponse} from "../../shared/pageable/pageable-generic-re
 import {Disease} from "../../model/disease";
 import {TreatmentItem} from "../../model/treatment-item";
 import {GenericSuccessResponse} from "../../shared/generic/generic-success-response";
+import {MedicalNote} from "../../model/notes";
 
 export const FetchUserDiseaseAction = createAction('[Medical] Fetch User Disease', props<{
   pagination: Pageable,
@@ -41,7 +42,20 @@ export const InitializeNewContactRequest = createAction('[Medical] Initialize Ne
   patientName: string
 }>())
 
-  export const UpdateTreatmentItemAction = createAction('[Medical] Update Treatment Item', props<{
+export const UpdateTreatmentItemAction = createAction('[Medical] Update Treatment Item', props<{
   treatmentId: number,
   items: TreatmentItem[]
+}>())
+
+export const AddNewMedicalNoteAction = createAction('[Medical] Add New Medical Action', props<{
+  diseaseId: number,
+  note: MedicalNote
+}>())
+
+export const FetchMedicalNotesAction = createAction('[Medical] Fetch Medical Notes Action', props<{
+  diseaseId: number
+}>())
+
+export const StoreMedicalNotesAction = createAction('[Medical] Store Medical Notes Action', props<{
+  notes: MedicalNote[]
 }>())

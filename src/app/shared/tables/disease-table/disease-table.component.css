@@ -156,3 +156,16 @@
 .view-patient-info-btn:hover {
   color: #0056b3; /* Darker shade on hover */
 }
+
+.view-medical-notes-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px; /* Adjust spacing as needed */
+  margin-right: 5px;
+  color: #2f6c30; /* Bootstrap primary color */
+}
+
+.view-medical-notes-btn:hover {
+  color: #61d662; /* Darker shade on hover */
+}

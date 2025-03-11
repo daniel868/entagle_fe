@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {MedicalNote} from "../../../model/notes";
 
 @Component({
   selector: 'app-note-item',

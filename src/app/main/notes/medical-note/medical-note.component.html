@@ -33,7 +33,7 @@
             <textarea
               class="note-input"
               placeholder="Add new medical note..."
-              [value]="newNote"
+              [(ngModel)]="newNote"
 
               aria-label="New medical note"
             >
@@ -50,7 +50,7 @@
     <div class="notes-list">
       <article class="note-item" *ngFor="let note of notes">
         <header class="note-header">
-          <time class="note-date">{{ note.date }}</time>
+          <time class="note-date">{{ note.createdDate  | date:'dd-MM-yyyy' }}</time>
           <button
             class="delete-button"
             (click)="deleteNote(note.id)"
@@ -72,17 +72,9 @@
             </svg>
           </button>
         </header>
-        <p class="note-text">{{ note.text }}</p>
+        <p class="note-text">{{ note.noteContent }}</p>
       </article>
     </div>
   </section>
 </aside>
-
-<button
-  class="open-button"
-  (click)="isOpen = true"
-  aria-label="Open medical notes"
->
-  Open Medical Notes
-</button>
 

@@ -41,12 +41,17 @@
 
 
             <div class="menu-container">
-
               <button class="view-patient-info-btn"
                       tooltip="View patient info"
-                      (click)="onPatientInfoClick(disease.patientSituation)"
-              >
+                      (click)="onPatientInfoClick(disease.patientSituation)">
                 <i class="bi bi-eye"></i> <!-- Bootstrap eye icon for "View Patient Info" -->
+              </button>
+
+              <button class="view-medical-notes-btn"
+                      tooltip="View medical notes"
+                      (click)="onNoteViewerClick(disease.id)"
+              >
+                <i class="bi bi-card-checklist"></i> <!-- Bootstrap eye icon for "View Patient Info" -->
               </button>
 
 
@@ -104,3 +109,8 @@
 
 
 </div>
+
+
+<app-medical-note [openCloseModalEventEmitter]="openCloseNotesDrawer">
+
+</app-medical-note>

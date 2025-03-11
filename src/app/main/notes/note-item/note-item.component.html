@@ -1,6 +1,6 @@
 <article class="note-container">
   <header class="note-header">
-    <time class="note-date">{{ note.date }}</time>
+    <time class="note-date">{{ note.createdDate }}</time>
     <button
       class="delete-button"
       (click)="onDelete.emit(note.id)"
@@ -22,5 +22,5 @@
       </svg>
     </button>
   </header>
-  <p class="note-text">{{ note.text }}</p>
+  <p class="note-text">{{ note.noteContent }}</p>
 </article>
