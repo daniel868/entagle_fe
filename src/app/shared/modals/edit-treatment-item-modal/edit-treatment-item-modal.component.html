@@ -7,12 +7,13 @@
 <div class="modal-body">
   <form [formGroup]="editItemForm" (ngSubmit)="updateItem()">
     <label for="itemDescription" class="mb-2 mt-2 h5">Recommendation:</label>
-    <input class="form-control"
-           placeholder="Recommendation"
-           type="text"
-           required
-           id="itemDescription"
-           formControlName="itemDescription">
+    <textarea class="form-control"
+              placeholder="Recommendation"
+              type="text"
+              rows="5"
+              required
+              id="itemDescription"
+              formControlName="itemDescription"></textarea>
     <button class="btn btn-primary mt-3"
             type="submit">
       Update description

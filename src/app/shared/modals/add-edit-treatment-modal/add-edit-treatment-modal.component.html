@@ -10,10 +10,10 @@
         [formGroup]="addEditTreatmentForm">
 
     <ng-container *ngIf="addDisease">
-      <label class="mb-2 h5">Condition:</label>
+      <label class="mb-2 h5">User:</label>
       <div class="input-group mb-2">
         <input type="text"
-               placeholder="Add condition"
+               placeholder="Add user"
                class="form-control"
                formControlName="inputCondition"
                id="inputCondition"
@@ -21,11 +21,11 @@
       </div>
     </ng-container>
 
-    <label class="mb-2 h5">Treatment:</label>
+    <label class="mb-2 h5">Recommendation:</label>
 
     <div class="input-group mb-3">
       <input type="text"
-             placeholder="Add treatment here"
+             placeholder="Add recommendation here"
              class="form-control"
              formControlName="inputTreatmentDescription"
              id="inputTreatmentDescription"

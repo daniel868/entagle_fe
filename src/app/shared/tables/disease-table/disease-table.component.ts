@@ -219,7 +219,7 @@ export class DiseaseTableComponent implements OnInit, OnDestroy, AfterViewInit {
   onAddDisease() {
     const initialState = {
       addDisease: true,
-      modalTitle: 'Add new recommendation'
+      modalTitle: 'Add new user'
     };
     const modalOptions: ModalOptions = {
       initialState: initialState,

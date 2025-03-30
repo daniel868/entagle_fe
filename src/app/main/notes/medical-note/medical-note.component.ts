@@ -57,7 +57,8 @@ export class MedicalNoteComponent implements OnInit {
       let newNote: MedicalNote = {
         id: null,
         noteContent: this.newNote,
-        createdDate: new Date()
+        createdDate: new Date(),
+        createdBy:''
       }
       this.store.dispatch(AddNewMedicalNoteAction({diseaseId: this.diseaseId, note: newNote}))
       this.newNote = "";

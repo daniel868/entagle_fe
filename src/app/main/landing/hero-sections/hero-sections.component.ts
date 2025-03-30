@@ -16,4 +16,8 @@ export class HeroSectionsComponent {
   onBookClick() {
     this.router.navigate(['/book-consult'])
   }
+
+  onLoginClick() {
+    this.router.navigate(['/app/auth'])
+  }
 }

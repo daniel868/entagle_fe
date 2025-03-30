@@ -98,7 +98,7 @@ export class MedicalEffects {
           .pipe(
             exhaustMap(response => {
               return [
-                GenericSuccessAction({message: "Success deleted disease"}),
+                GenericSuccessAction({message: "Success deleted user"}),
                 FetchUserDiseaseAction({pagination: {page: 1, size: 10}, searchString: ''})
               ]
             })

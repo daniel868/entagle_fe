@@ -87,7 +87,7 @@
               </td>
               <td class="floating-list-item" *ngFor="let item of treatment.items"
                   (click)="onTreatmentItemClicked(treatment.id, item,treatment.items)">
-                {{ item.description ? item.description : '' }}
+                {{ item.description ? item.description.length > 30 ? item.description.substring(0, 30) + '...' : item.description : '' }}
               </td>
             </tr>
           </ng-container>
